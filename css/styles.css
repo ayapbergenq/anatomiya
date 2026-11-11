@@ -1,0 +1,1282 @@
+/* ==========================================================================
+   ODAM ANATOMIYASI (ATLAS, 1-JILD) — 1-BO'LIM: OSTEOLOGIYA
+   PROF. N.K. AHMEDOV WEB-ATLASI
+   DIZAYN TIZIMI: NEO-GLASSMORPHISM & CYBER-MEDICAL FUTURISTIC UI
+   ========================================================================== */
+
+/* ==========================================================================
+   1. THEME DESIGN TOKENS & COLOR PALETTES
+   ========================================================================== */
+
+/* 1.1 NIGHT MODE (Default / Tungi) — Deep Cyber-Medical Blue with Electric Neon */
+:root,
+html.theme-night {
+  --bg-deep: #050a18;
+  --bg-surface: #0a1329;
+  --bg-surface-elevated: #0f1c3d;
+  --bg-card: rgba(10, 20, 44, 0.72);
+  --bg-card-solid: #0d172e;
+
+  /* Cyber & Neon Accents */
+  --neon-cyan: #00f2fe;
+  --neon-teal: #05ffa1;
+  --neon-indigo: #818cf8;
+  --neon-amber: #fbbf24;
+  --neon-rose: #ff3366;
+
+  --primary-cyan: #38bdf8;
+  --primary-teal: #14b8a6;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  --accent-violet: #a855f7;
+
+  --border-subtle: rgba(56, 189, 248, 0.22);
+  --border-glow: rgba(56, 189, 248, 0.55);
+  --border-emerald: rgba(16, 185, 129, 0.45);
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --bone-ivory: #f8fafc;
+  --bone-warm: #fed7aa;
+
+  /* Neo-Glass Specular & Glow Properties */
+  --glass-blur: blur(20px) saturate(190%);
+  --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 18px rgba(56, 189, 248, 0.05);
+  --glass-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.45), 0 0 1px 1px rgba(56, 189, 248, 0.18);
+  --glass-hover-shadow: 0 18px 48px -10px rgba(0, 0, 0, 0.65), 0 0 28px rgba(56, 189, 248, 0.35);
+
+  --shadow-glow-cyan: 0 0 25px rgba(0, 242, 254, 0.35);
+  --shadow-glow-amber: 0 0 25px rgba(245, 158, 11, 0.35);
+
+  --canvas-bg: radial-gradient(circle at 50% 35%, #132757 0%, #060c1d 100%);
+  --theme-pill-bg: rgba(10, 18, 38, 0.85);
+  --theme-btn-active-bg: rgba(56, 189, 248, 0.22);
+  --theme-btn-active-color: #38bdf8;
+  --theme-btn-active-border: rgba(56, 189, 248, 0.5);
+}
+
+/* 1.2 DAY MODE (Kunduzgi) — Clean Luminescent Neo-Glass & High Contrast */
+html.theme-day {
+  --bg-deep: #f0f4f9;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-solid: #ffffff;
+
+  --neon-cyan: #0284c7;
+  --neon-teal: #0d9488;
+  --neon-indigo: #6366f1;
+  --neon-amber: #d97706;
+  --neon-rose: #e11d48;
+
+  --primary-cyan: #0284c7;
+  --primary-teal: #0d9488;
+  --accent-amber: #d97706;
+  --accent-rose: #e11d48;
+  --accent-violet: #7c3aed;
+
+  --border-subtle: rgba(226, 232, 240, 0.95);
+  --border-glow: rgba(2, 132, 199, 0.45);
+  --border-emerald: rgba(13, 148, 136, 0.4);
+
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --text-dim: #64748b;
+
+  --bone-ivory: #ffffff;
+  --bone-warm: #fed7aa;
+
+  --glass-blur: blur(20px) saturate(180%);
+  --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), inset 0 0 16px rgba(2, 132, 199, 0.04);
+  --glass-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 0 1px rgba(2, 132, 199, 0.25);
+  --glass-hover-shadow: 0 16px 36px -8px rgba(2, 132, 199, 0.16), 0 0 20px rgba(2, 132, 199, 0.2);
+
+  --shadow-glow-cyan: 0 4px 20px rgba(2, 132, 199, 0.16);
+  --shadow-glow-amber: 0 4px 20px rgba(217, 119, 6, 0.18);
+
+  --canvas-bg: radial-gradient(circle at 50% 35%, #ffffff 0%, #e2e8f0 100%);
+  --theme-pill-bg: #e2e8f0;
+  --theme-btn-active-bg: #ffffff;
+  --theme-btn-active-color: #0f172a;
+  --theme-btn-active-border: #cbd5e1;
+}
+
+/* 1.3 CLINICAL / CLASSIC MODE (Klassik Tibbiy) — Aristocratic Medical Archive Glass */
+html.theme-clinical {
+  --bg-deep: #f6f1e7;
+  --bg-surface: #faf6ee;
+  --bg-surface-elevated: #ebe3d5;
+  --bg-card: rgba(250, 246, 238, 0.92);
+  --bg-card-solid: #faf6ee;
+
+  --neon-cyan: #1e3a8a;
+  --neon-teal: #0f766e;
+  --neon-indigo: #4338ca;
+  --neon-amber: #b45309;
+  --neon-rose: #be123c;
+
+  --primary-cyan: #1e3a8a;
+  --primary-teal: #0f766e;
+  --accent-amber: #b45309;
+  --accent-rose: #be123c;
+  --accent-violet: #6b21a8;
+
+  --border-subtle: rgba(214, 200, 180, 0.85);
+  --border-glow: rgba(30, 58, 138, 0.45);
+  --border-emerald: rgba(15, 118, 110, 0.4);
+
+  --text-main: #172554;
+  --text-muted: #334155;
+  --text-dim: #64748b;
+
+  --bone-ivory: #fdfbf7;
+  --bone-warm: #fed7aa;
+
+  --glass-blur: blur(20px) saturate(180%);
+  --glass-specular: inset 0 1px 1px 0 rgba(255, 255, 255, 0.88);
+  --glass-shadow: 0 10px 30px -5px rgba(60, 45, 25, 0.08), 0 0 1px rgba(30, 58, 138, 0.2);
+  --glass-hover-shadow: 0 16px 36px -8px rgba(30, 58, 138, 0.16), 0 0 20px rgba(30, 58, 138, 0.18);
+
+  --shadow-glow-cyan: 0 4px 20px rgba(30, 58, 138, 0.15);
+  --shadow-glow-amber: 0 4px 20px rgba(180, 83, 9, 0.15);
+
+  --canvas-bg: radial-gradient(circle at 50% 35%, #fbf8f2 0%, #ebe2d3 100%);
+  --theme-pill-bg: #ebe2d3;
+  --theme-btn-active-bg: #ffffff;
+  --theme-btn-active-color: #1e3a8a;
+  --theme-btn-active-border: #d6c8b4;
+}
+
+/* ==========================================================================
+   2. GLOBAL BODY & CYBER-AMBIENT BACKDROP
+   ========================================================================== */
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(5, 10, 24, 0.95);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 9999px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+  box-shadow: 0 0 12px #38bdf8;
+}
+
+/* Cyber Ambient Background Canvas & Floating Orbs */
+.cyber-ambient-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.cyber-ambient-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.65;
+  will-change: transform;
+  animation: orb-float 20s infinite ease-in-out alternate;
+}
+
+.cyber-ambient-orb.orb-1 {
+  width: 550px;
+  height: 550px;
+  top: -120px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.16) 0%, rgba(14, 165, 233, 0.05) 50%, transparent 70%);
+  animation-duration: 22s;
+}
+
+.cyber-ambient-orb.orb-2 {
+  width: 600px;
+  height: 600px;
+  top: 35%;
+  right: -150px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, rgba(168, 85, 247, 0.04) 50%, transparent 70%);
+  animation-duration: 26s;
+  animation-direction: reverse;
+}
+
+.cyber-ambient-orb.orb-3 {
+  width: 500px;
+  height: 500px;
+  bottom: 5%;
+  left: 20%;
+  background: radial-gradient(circle, rgba(5, 255, 161, 0.1) 0%, rgba(20, 184, 166, 0.03) 50%, transparent 70%);
+  animation-duration: 24s;
+}
+
+@keyframes orb-float {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 30px) scale(1.08); }
+  100% { transform: translate(-30px, 50px) scale(0.94); }
+}
+
+/* Fine Cyber-Medical Coordinate Grid */
+.cyber-ambient-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0.1) 85%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9) 30%, rgba(0, 0, 0, 0.1) 85%);
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   3. NEO-GLASSMORPHISM & CYBER-HUD CARD COMPONENTS
+   ========================================================================== */
+
+/* 3.1 Primary Neo-Glass Panel */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  position: relative;
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--glass-hover-shadow), var(--glass-specular);
+  transform: translateY(-3px);
+}
+
+/* 3.2 Futuristic Cyber-HUD Reticle Brackets (.cyber-hud-card) */
+.cyber-hud-card {
+  position: relative;
+}
+
+.cyber-hud-card::before,
+.cyber-hud-card::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  z-index: 15;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-hud-card::before {
+  top: 8px;
+  left: 8px;
+  border-top: 2px solid var(--primary-cyan);
+  border-left: 2px solid var(--primary-cyan);
+  border-top-left-radius: 4px;
+}
+
+.cyber-hud-card::after {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 2px solid var(--primary-cyan);
+  border-right: 2px solid var(--primary-cyan);
+  border-bottom-right-radius: 4px;
+}
+
+.cyber-hud-card:hover::before,
+.cyber-hud-card:hover::after {
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(0 0 8px var(--primary-cyan));
+}
+
+/* 3.3 Glowing Text & Accent Utilities */
+.glow-text-cyan {
+  text-shadow: 0 0 16px rgba(0, 242, 254, 0.65), 0 0 32px rgba(14, 165, 233, 0.3);
+}
+.glow-text-amber {
+  text-shadow: 0 0 16px rgba(245, 158, 11, 0.65), 0 0 32px rgba(217, 119, 6, 0.3);
+}
+.glow-text-emerald {
+  text-shadow: 0 0 16px rgba(5, 255, 161, 0.65), 0 0 32px rgba(16, 185, 129, 0.3);
+}
+
+/* ==========================================================================
+   4. CYBER HEADER & FLOATING SECONDARY NAVIGATION
+   ========================================================================== */
+
+/* 4.1 Sticky Top Brand Bar */
+.cyber-header {
+  background: linear-gradient(180deg, rgba(8, 15, 35, 0.88) 0%, rgba(5, 10, 24, 0.82) 100%);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45), inset 0 -1px 0 0 rgba(0, 242, 254, 0.35);
+}
+
+/* 4.2 Module Navigation Bar */
+.cyber-nav-bar {
+  background: rgba(8, 15, 35, 0.72);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.16);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.nav-tab-btn {
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 700;
+  user-select: none;
+}
+
+.nav-tab-btn:hover {
+  color: var(--primary-cyan);
+  transform: translateY(-1.5px);
+}
+
+.nav-tab-btn.active {
+  color: #38bdf8 !important;
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.16) 0%, rgba(56, 189, 248, 0.04) 100%) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+}
+
+.nav-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 12%;
+  right: 12%;
+  height: 3px;
+  background: linear-gradient(90deg, #00f2fe, #05ffa1);
+  border-radius: 9999px;
+  box-shadow: 0 0 12px #00f2fe, 0 0 24px #05ffa1;
+}
+
+/* 4.3 3-Way Theme Switcher Pill */
+.theme-switcher-pill {
+  background: var(--theme-pill-bg);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.1);
+  transition: all 0.25s ease;
+}
+
+.theme-btn {
+  color: var(--text-dim);
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.theme-btn:hover {
+  color: var(--text-main);
+  background: rgba(148, 163, 184, 0.12);
+}
+
+.theme-btn.active,
+.theme-btn.theme-btn-active {
+  background: var(--theme-btn-active-bg) !important;
+  color: var(--theme-btn-active-color) !important;
+  border-color: var(--theme-btn-active-border) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25), 0 0 8px rgba(56, 189, 248, 0.2);
+}
+
+/* ==========================================================================
+   5. INTERACTIVE 2D ANATOMICAL VIEWERS & RADAR HOTSPOTS
+   ========================================================================== */
+
+/* 5.1 Anatomy Canvas Container */
+.anatomy-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  background: var(--canvas-bg);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.1);
+}
+
+.anatomy-canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 5.2 Anatomy SVG Bone Shapes */
+.bone-path {
+  cursor: pointer;
+  transition: fill 0.25s ease, stroke 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+}
+
+.bone-path:hover {
+  stroke: #00f2fe !important;
+  stroke-width: 2.5px !important;
+  filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.85)) !important;
+}
+
+.bone-path.active {
+  stroke: #f59e0b !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.9)) !important;
+}
+
+/* 5.3 Interactive Pin Hotspots with Cyber-Sonar Rings */
+.pin-hotspot {
+  cursor: pointer;
+  transform-origin: center center;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+}
+
+.pin-hotspot:hover {
+  transform: scale(1.35);
+  filter: drop-shadow(0 0 14px #00f2fe);
+}
+
+.pin-hotspot.active {
+  transform: scale(1.45);
+  filter: drop-shadow(0 0 18px #f59e0b);
+}
+
+.pin-hotspot circle.radar-pulse {
+  animation: cyber-sonar 2.2s infinite ease-out;
+  transform-origin: center center;
+}
+
+@keyframes cyber-sonar {
+  0% { r: 10; stroke-opacity: 0.9; stroke-width: 2px; }
+  50% { stroke-opacity: 0.4; }
+  100% { r: 22; stroke-opacity: 0; stroke-width: 0.5px; }
+}
+
+/* 5.4 Custom Neon Range Slider */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.2) 0%, rgba(56, 189, 248, 0.3) 100%);
+  border-radius: 9999px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+input[type=range]::-webkit-slider-thumb {
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #7dd3fc 0%, #0284c7 100%);
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+  box-shadow: 0 0 14px #38bdf8, 0 2px 6px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 22px #00f2fe, 0 0 35px rgba(0, 242, 254, 0.6);
+}
+
+/* ==========================================================================
+   6. CYBER-MEDICAL QUIZ ENGINE STYLING
+   ========================================================================== */
+
+.quiz-stepper-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.6rem;
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.quiz-stepper-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+.quiz-stepper-current {
+  border-color: #00f2fe !important;
+  background: rgba(0, 242, 254, 0.2) !important;
+  color: #00f2fe !important;
+  box-shadow: 0 0 14px rgba(0, 242, 254, 0.5), inset 0 0 8px rgba(0, 242, 254, 0.2) !important;
+}
+
+.quiz-option-btn {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-option-btn:hover:not(.quiz-answered) {
+  transform: translateX(4px);
+  border-color: rgba(0, 242, 254, 0.6);
+  background: rgba(15, 28, 58, 0.85);
+  box-shadow: 0 4px 18px rgba(0, 242, 254, 0.15);
+}
+
+.quiz-option-correct {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #10b981 !important;
+  color: #10b981 !important;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.4), inset 0 0 12px rgba(16, 185, 129, 0.15) !important;
+}
+
+.quiz-option-wrong {
+  background: rgba(244, 63, 94, 0.2) !important;
+  border-color: #f43f5e !important;
+  color: #f43f5e !important;
+  box-shadow: 0 0 18px rgba(244, 63, 94, 0.4), inset 0 0 12px rgba(244, 63, 94, 0.15) !important;
+}
+
+/* ==========================================================================
+   7. ADMIN PANEL & MODALS
+   ========================================================================== */
+
+#admin-modal,
+#admin-question-form-modal,
+#admin-entry-form-modal,
+#search-modal,
+#figure-modal {
+  background: rgba(2, 6, 20, 0.84);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+}
+
+#admin-modal .glass-panel {
+  max-height: 90vh;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 242, 254, 0.2);
+}
+
+.admin-tab-btn {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.admin-tab-btn.active {
+  background: rgba(56, 189, 248, 0.18) !important;
+  color: var(--primary-cyan) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25) !important;
+}
+
+.admin-card {
+  background: rgba(10, 20, 44, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.2s ease;
+}
+
+.admin-card:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(14, 26, 56, 0.85);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5), 0 0 16px rgba(56, 189, 248, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Toast alert notification */
+#admin-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  transform: translateY(140%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+#admin-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   8. INTRO SPLASH OVERLAY & HERO ANIMATION STYLES
+   ========================================================================== */
+
+#intro-splash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle at 50% 40%, #0d1b3e 0%, #060b18 75%, #02050e 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+#intro-splash-overlay.hidden,
+#intro-splash-overlay.closed,
+#intro-splash-overlay[hidden] {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  z-index: -9999 !important;
+  opacity: 0 !important;
+}
+
+#hero-section.hidden {
+  display: none !important;
+}
+
+/* Bio-digital Cyber Grid inside Splash */
+.bio-digital-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+  background-position: center center;
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 80%);
+  pointer-events: none;
+}
+
+/* Horizontal Scanline sweep */
+.scanline-sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, #00f2fe 30%, #05ffa1 50%, #00f2fe 70%, transparent 100%);
+  box-shadow: 0 0 20px #00f2fe, 0 0 40px #0ea5e9;
+  animation: scanline-move 3.5s infinite ease-in-out;
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+@keyframes scanline-move {
+  0% { top: 5%; opacity: 0; }
+  20% { opacity: 0.9; }
+  80% { opacity: 0.9; }
+  100% { top: 95%; opacity: 0; }
+}
+
+/* Glowing Bio Pulse Ring */
+.pulse-ring-glow {
+  position: relative;
+}
+.pulse-ring-glow::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  border: 2px solid #00f2fe;
+  opacity: 0.7;
+  animation: pulse-ring-expand 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-ring-expand {
+  0% { transform: scale(0.96); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 0.2; }
+  100% { transform: scale(1.14); opacity: 0; }
+}
+
+/* Hero Section Gradient Border Frame */
+.hero-gradient-border {
+  position: relative;
+  border-radius: 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.5), var(--shadow-glow-cyan);
+}
+
+.hero-module-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid var(--border-subtle);
+  background: rgba(10, 20, 44, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.hero-module-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary-cyan);
+  background: rgba(14, 26, 56, 0.95);
+  box-shadow: 0 10px 25px -4px rgba(56, 189, 248, 0.3);
+}
+
+/* ==========================================================================
+   8.5 CLINICAL MEDICAL & STUDY-OPTIMIZED UI (SOBOTTA / NETTER STYLE)
+   ========================================================================== */
+
+/* Split-Screen / Side-by-Side Clinical Study Viewport */
+.clinical-study-view {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .clinical-study-view {
+    grid-template-columns: minmax(0, 52%) minmax(0, 48%);
+    gap: 2rem;
+  }
+  .clinical-diagram-pane {
+    position: sticky;
+    top: 125px;
+    z-index: 20;
+  }
+}
+
+/* 2D Anatomy Specimen Stage */
+.clinical-diagram-stage {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: var(--canvas-bg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4), 0 12px 36px -10px rgba(0, 0, 0, 0.45);
+}
+
+/* Self-Test / Study Mode: Hides text labels on diagrams so students can test their recall */
+body.study-mode-active svg text:not(.pin-number-text):not(.pin-hotspot text) {
+  opacity: 0 !important;
+  visibility: hidden;
+  transition: opacity 0.25s ease;
+}
+
+.study-mode-pill {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+.study-mode-active .study-mode-pill {
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: #10b981 !important;
+  color: #34d399 !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+}
+
+/* High-Yield Clinical Dossier Card */
+.clinical-dossier-card {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  line-height: 1.6;
+}
+
+.clinical-badge-latin {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.02em;
+}
+
+.clinical-pin-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 800;
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.45);
+}
+
+.clinical-tag-yield {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.quick-facts-box {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.clinical-alert-box {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.audio-speak-btn {
+  cursor: pointer;
+  outline: none;
+}
+.audio-speak-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   9. DAY MODE (html.theme-day) OVERRIDES
+   ========================================================================== */
+html.theme-day body {
+  background-color: var(--bg-deep) !important;
+  color: var(--text-main) !important;
+}
+
+html.theme-day .cyber-header {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-bottom-color: rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+}
+
+html.theme-day .cyber-nav-bar {
+  background: rgba(248, 250, 252, 0.95) !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+html.theme-day .glass-panel {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 8px 25px -2px rgba(15, 23, 42, 0.06), inset 0 1px 1px #ffffff !important;
+}
+
+html.theme-day .glass-panel-hover:hover {
+  border-color: #0284c7 !important;
+  box-shadow: 0 14px 30px -5px rgba(2, 132, 199, 0.14) !important;
+}
+
+html.theme-day .cyber-ambient-grid {
+  background-image: 
+    linear-gradient(rgba(2, 132, 199, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(2, 132, 199, 0.05) 1px, transparent 1px) !important;
+}
+
+html.theme-day div[class*="from-surface"],
+html.theme-day div[class*="bg-surface"] {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+
+html.theme-day div[class*="bg-slate-900"],
+html.theme-day div[class*="bg-slate-950"],
+html.theme-day button[class*="bg-slate-900"],
+html.theme-day button[class*="bg-slate-950"],
+html.theme-day div[class*="bg-card"] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+}
+
+html.theme-day button[class*="bg-slate-900"]:hover,
+html.theme-day button[class*="bg-slate-950"]:hover {
+  background-color: #f1f5f9 !important;
+}
+
+html.theme-day .text-white,
+html.theme-day .text-slate-100,
+html.theme-day .text-slate-200,
+html.theme-day h1,
+html.theme-day h2,
+html.theme-day h3,
+html.theme-day h4 {
+  color: #0f172a !important;
+}
+
+html.theme-day .text-slate-300,
+html.theme-day .text-slate-400 {
+  color: #334155 !important;
+}
+
+html.theme-day .text-slate-500 {
+  color: #64748b !important;
+}
+
+html.theme-day .border-slate-800,
+html.theme-day .border-slate-700 {
+  border-color: #e2e8f0 !important;
+}
+
+html.theme-day .text-cyan-400 {
+  color: #0284c7 !important;
+}
+
+html.theme-day .bg-cyan-950,
+html.theme-day div[class*="bg-cyan-950"],
+html.theme-day span[class*="bg-cyan-950"] {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border-color: #bae6fd !important;
+}
+
+html.theme-day .bg-amber-950,
+html.theme-day div[class*="bg-amber-950"],
+html.theme-day span[class*="bg-amber-950"] {
+  background-color: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fde68a !important;
+}
+
+html.theme-day .nav-tab-btn {
+  color: #64748b;
+}
+
+html.theme-day .nav-tab-btn.active {
+  background: #e0f2fe !important;
+  color: #0284c7 !important;
+  border-color: #bae6fd !important;
+}
+
+html.theme-day .anatomy-canvas {
+  background: radial-gradient(circle at center, #ffffff 0%, #e2e8f0 100%) !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.theme-day .quiz-stepper-current {
+  border-color: #0284c7 !important;
+  background: #e0f2fe !important;
+  color: #0284c7 !important;
+}
+
+html.theme-day .quiz-option-correct {
+  background: #ecfdf5 !important;
+  border-color: #10b981 !important;
+  color: #047857 !important;
+}
+
+html.theme-day .quiz-option-wrong {
+  background: #fff1f2 !important;
+  border-color: #f43f5e !important;
+  color: #be123c !important;
+}
+
+html.theme-day #admin-modal .glass-panel {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+html.theme-day #admin-modal .admin-card {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* ==========================================================================
+   10. CLINICAL / CLASSIC MODE (html.theme-clinical) OVERRIDES
+   ========================================================================== */
+html.theme-clinical body {
+  background-color: var(--bg-deep) !important;
+  color: var(--text-main) !important;
+}
+
+html.theme-clinical .cyber-header {
+  background: rgba(247, 243, 235, 0.94) !important;
+  border-bottom-color: #dfd5c4 !important;
+  box-shadow: 0 2px 10px rgba(100, 80, 50, 0.06);
+}
+
+html.theme-clinical .cyber-nav-bar {
+  background: rgba(243, 237, 226, 0.95) !important;
+  border-bottom-color: #dfd5c4 !important;
+}
+
+html.theme-clinical .glass-panel {
+  background: rgba(250, 246, 238, 0.92) !important;
+  border-color: #dfd5c4 !important;
+  box-shadow: 0 8px 25px rgba(80, 65, 40, 0.05) !important;
+}
+
+html.theme-clinical .glass-panel-hover:hover {
+  border-color: #1e3a8a !important;
+  box-shadow: 0 14px 30px -5px rgba(30, 58, 138, 0.15) !important;
+}
+
+html.theme-clinical div[class*="from-surface"],
+html.theme-clinical div[class*="bg-surface"] {
+  background-color: #faf6ee !important;
+  background-image: none !important;
+}
+
+html.theme-clinical div[class*="bg-slate-900"],
+html.theme-clinical div[class*="bg-slate-950"],
+html.theme-clinical button[class*="bg-slate-900"],
+html.theme-clinical button[class*="bg-slate-950"],
+html.theme-clinical div[class*="bg-card"] {
+  background-color: #faf6ee !important;
+  border-color: #dfd5c4 !important;
+  color: #172554 !important;
+}
+
+html.theme-clinical button[class*="bg-slate-900"]:hover,
+html.theme-clinical button[class*="bg-slate-950"]:hover {
+  background-color: #ede5d8 !important;
+}
+
+html.theme-clinical .text-white,
+html.theme-clinical .text-slate-100,
+html.theme-clinical .text-slate-200,
+html.theme-clinical h1,
+html.theme-clinical h2,
+html.theme-clinical h3,
+html.theme-clinical h4 {
+  color: #172554 !important;
+}
+
+html.theme-clinical .text-slate-300,
+html.theme-clinical .text-slate-400 {
+  color: #334155 !important;
+}
+
+html.theme-clinical .text-slate-500 {
+  color: #64748b !important;
+}
+
+html.theme-clinical .border-slate-800,
+html.theme-clinical .border-slate-700 {
+  border-color: #dfd5c4 !important;
+}
+
+html.theme-clinical .text-cyan-400 {
+  color: #0369a1 !important;
+}
+
+html.theme-clinical .bg-cyan-950,
+html.theme-clinical div[class*="bg-cyan-950"],
+html.theme-clinical span[class*="bg-cyan-950"] {
+  background-color: #e8decb !important;
+  color: #1e3a8a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.theme-clinical .nav-tab-btn {
+  color: #475569;
+}
+
+html.theme-clinical .nav-tab-btn.active {
+  background: #ebe2d3 !important;
+  color: #1e3a8a !important;
+  border-color: #d6c8b4 !important;
+}
+
+html.theme-clinical .anatomy-canvas {
+  background: radial-gradient(circle at center, #fbf8f2 0%, #ebe2d3 100%) !important;
+  border-color: #dfd5c4 !important;
+}
+
+html.theme-clinical .quiz-stepper-current {
+  border-color: #1e3a8a !important;
+  background: #ebe2d3 !important;
+  color: #1e3a8a !important;
+}
+
+html.theme-clinical .quiz-option-correct {
+  background: #f0fdf4 !important;
+  border-color: #10b981 !important;
+  color: #065f46 !important;
+}
+
+html.theme-clinical .quiz-option-wrong {
+  background: #fff1f2 !important;
+  border-color: #f43f5e !important;
+  color: #9f1239 !important;
+}
+
+html.theme-clinical #admin-modal .glass-panel {
+  background: rgba(250, 246, 238, 0.98) !important;
+  border-color: #dfd5c4 !important;
+  color: #1e3a8a !important;
+}
+html.theme-clinical #admin-modal .admin-card {
+  background: #fdfbf7 !important;
+  border-color: #dfd5c4 !important;
+}
+
+/* Clinical Dossier Day Mode Overrides */
+html.theme-day .clinical-dossier-card {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: #cbd5e1 !important;
+}
+html.theme-day .quick-facts-box {
+  background: #f0f9ff !important;
+  border-color: #bae6fd !important;
+}
+html.theme-day .clinical-alert-box {
+  background: #fffbeb !important;
+  border-color: #fde68a !important;
+}
+html.theme-day .clinical-alert-box p {
+  color: #451a03 !important;
+}
+html.theme-day .clinical-badge-latin {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  border-color: #bae6fd !important;
+}
+html.theme-day .clinical-diagram-stage {
+  background: radial-gradient(circle at center, #ffffff 0%, #e2e8f0 100%) !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Clinical Dossier Classic Mode Overrides */
+html.theme-clinical .clinical-dossier-card {
+  background: rgba(250, 246, 238, 0.96) !important;
+  border-color: #dfd5c4 !important;
+}
+html.theme-clinical .quick-facts-box {
+  background: #f5ede0 !important;
+  border-color: #d6c8b4 !important;
+}
+html.theme-clinical .clinical-alert-box {
+  background: #fef3c7 !important;
+  border-color: #fcd34d !important;
+}
+html.theme-clinical .clinical-alert-box p {
+  color: #78350f !important;
+}
+html.theme-clinical .clinical-badge-latin {
+  background: #e8decb !important;
+  color: #1e3a8a !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* ==========================================================================
+   11. STRUCTURED ENTRY HUB & MYOLOGY STYLING
+   ========================================================================== */
+.section-hub-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(8, 14, 30, 0.9) 100%);
+  border: 1.5px solid rgba(56, 189, 248, 0.25);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px -10px rgba(2, 132, 199, 0.2);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.section-hub-card:hover {
+  border-color: rgba(56, 189, 248, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(2, 132, 199, 0.35);
+}
+
+.section-hub-card.card-myology {
+  border-color: rgba(244, 63, 94, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(225, 29, 72, 0.2);
+}
+
+.section-hub-card.card-myology:hover {
+  border-color: rgba(244, 63, 94, 0.7);
+  box-shadow: 0 20px 40px -12px rgba(225, 29, 72, 0.35);
+}
+
+.section-switch-pill {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.myology-subtab-btn {
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+}
+
+.myology-subtab-btn:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+}
+
+.myology-subtab-btn.active {
+  background: rgba(56, 189, 248, 0.2) !important;
+  border-color: rgba(56, 189, 248, 0.5) !important;
+  color: #38bdf8 !important;
+}
+
+/* Day Mode Overrides for Section Hub & Myology */
+html.theme-day .section-hub-card {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.theme-day .section-hub-card:hover {
+  border-color: #0284c7 !important;
+  box-shadow: 0 15px 35px -5px rgba(2, 132, 199, 0.15) !important;
+}
+
+html.theme-day .section-hub-card.card-myology:hover {
+  border-color: #e11d48 !important;
+  box-shadow: 0 15px 35px -5px rgba(225, 29, 72, 0.15) !important;
+}
+
+html.theme-day .section-switch-pill {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.theme-day .myology-subtab-btn {
+  color: #475569;
+}
+
+html.theme-day .myology-subtab-btn.active {
+  background: #e0f2fe !important;
+  border-color: #bae6fd !important;
+  color: #0284c7 !important;
+}
+
+/* Clinical Mode Overrides for Section Hub & Myology */
+html.theme-clinical .section-hub-card {
+  background: #fdfbf7 !important;
+  border-color: #dfd5c4 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.theme-clinical .section-hub-card:hover {
+  border-color: #0284c7 !important;
+  box-shadow: 0 15px 35px -5px rgba(2, 132, 199, 0.12) !important;
+}
+
+html.theme-clinical .section-switch-pill {
+  background: #f5ede0 !important;
+  border-color: #dfd5c4 !important;
+}
+
+html.theme-clinical .myology-subtab-btn {
+  color: #5c5549;
+}
+
+html.theme-clinical .myology-subtab-btn.active {
+  background: #e8decb !important;
+  border-color: #d6c8b4 !important;
+  color: #1e3a8a !important;
+}

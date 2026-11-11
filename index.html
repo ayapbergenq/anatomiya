@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odam anatomiyasi (Atlas, 1-jild) — 1-bo'lim: Suyaklar haqida ta'limot (Osteologiya) | Prof. N.K. Ahmedov</title>
+  <meta name="description" content="Prof. N.K. Ahmedovning 'Odam anatomiyasi' kitobi asosidagi interaktiv o'quv veb-atlasi. 1-bo'lim: Osteologiya (4–53-betlar, 1–113-rasmlar). 5 ta modul, 2D/3D animatsiyalar, lotincha-o'zbekcha lug'at va viktorina.">
+
+  <!-- Google Fonts: Outfit, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            deep: 'var(--bg-deep)',
+            surface: 'var(--bg-surface)',
+            card: 'var(--bg-card)',
+            primary: 'var(--primary-cyan)',
+            accent: 'var(--accent-amber)',
+          },
+          fontFamily: {
+            outfit: ['Outfit', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- Custom Medical Atlas Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-deep text-slate-100 min-h-screen flex flex-col font-outfit antialiased selection:bg-cyan-500 selection:text-slate-950 transition-colors duration-300 relative">
+
+  <!-- Neo-Glass & Cyber-Medical Ambient Canvas Layers -->
+  <div class="cyber-ambient-canvas" aria-hidden="true">
+    <div class="cyber-ambient-orb orb-1"></div>
+    <div class="cyber-ambient-orb orb-2"></div>
+    <div class="cyber-ambient-orb orb-3"></div>
+    <div class="cyber-ambient-grid"></div>
+  </div>
+
+  <!-- =========================================================================
+       CINEMATIC ANATOMICAL INTRO SPLASH OVERLAY (INITIAL VISIT / REPLAY)
+       ========================================================================= -->
+  <div id="intro-splash-overlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 sm:p-6 transition-all">
+    <!-- Bio-digital background grid & scanline sweep -->
+    <div class="bio-digital-grid"></div>
+    <div class="scanline-sweep"></div>
+
+    <div class="relative z-10 max-w-5xl w-full flex flex-col items-center text-center space-y-6 sm:space-y-8 animate-fadeIn">
+      
+      <!-- Top Telemetry Pill -->
+      <div class="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/40 shadow-lg shadow-cyan-500/20 backdrop-blur-md">
+        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+        <span class="text-xs font-mono font-bold tracking-wider uppercase text-cyan-300">
+          Interaktiv Tibbiy Atlas • 2D Vektor
+        </span>
+      </div>
+
+      <!-- Center 2D Medical Vector Emblem -->
+      <div class="relative w-full max-w-md h-64 sm:h-72 flex items-center justify-center">
+        <!-- Concentric medical radar rings -->
+        <div class="absolute inset-2 rounded-full border border-cyan-500/20 animate-spin" style="animation-duration: 25s;"></div>
+        <div class="absolute inset-8 rounded-full border border-cyan-500/30 border-dashed animate-spin" style="animation-duration: 40s; animation-direction: reverse;"></div>
+        
+        <div class="relative z-10 w-44 h-44 sm:w-52 sm:h-52 rounded-full bg-slate-950/80 border-2 border-cyan-500/40 p-4 shadow-[0_0_40px_rgba(56,189,248,0.25)] flex items-center justify-center">
+          <svg viewBox="0 0 160 160" class="w-36 h-36 sm:w-44 sm:h-44 select-none filter drop-shadow-[0_4px_12px_rgba(56,189,248,0.4)]">
+            <!-- Medical Cross & Pulse Guidelines -->
+            <line x1="80" y1="10" x2="80" y2="150" stroke="rgba(56,189,248,0.25)" stroke-width="1" stroke-dasharray="3,3" />
+            <line x1="10" y1="80" x2="150" y2="80" stroke="rgba(56,189,248,0.25)" stroke-width="1" stroke-dasharray="3,3" />
+            
+            <!-- Anatomical 2D Cranium & Spine Emblem Silhouette -->
+            <!-- Cranium -->
+            <path d="M80,24 C62,24 54,38 54,52 C54,64 60,72 68,76 L68,82 C74,84 86,84 92,82 L92,76 C100,72 106,64 106,52 C106,38 98,24 80,24 Z" fill="#0ea5e9" opacity="0.85" stroke="#38bdf8" stroke-width="1.8" />
+            <!-- Orbits -->
+            <ellipse cx="70" cy="52" rx="6" ry="7" fill="#030712" />
+            <ellipse cx="90" cy="52" rx="6" ry="7" fill="#030712" />
+            <polygon points="80,58 77,66 83,66" fill="#030712" />
+            <!-- Teeth line -->
+            <line x1="73" y1="74" x2="87" y2="74" stroke="#030712" stroke-width="1.5" />
+
+            <!-- Columna vertebralis (Vertebrae stack) -->
+            <rect x="74" y="87" width="12" height="6" rx="2" fill="#38bdf8" opacity="0.9" />
+            <rect x="73" y="96" width="14" height="6.5" rx="2" fill="#38bdf8" opacity="0.9" />
+            <rect x="72" y="105.5" width="16" height="7" rx="2" fill="#38bdf8" opacity="0.9" />
+            <rect x="70.5" y="115.5" width="19" height="7.5" rx="2" fill="#38bdf8" opacity="0.9" />
+            <!-- Sacrum triangular apex -->
+            <polygon points="69,126 91,126 80,144" fill="#0284c7" stroke="#38bdf8" stroke-width="1.2" />
+
+            <!-- Bilateral Rib Arches -->
+            <path d="M72,94 C52,90 44,106 58,114" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.85" />
+            <path d="M88,94 C108,90 116,106 102,114" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.85" />
+            <path d="M71,104 C48,102 42,118 56,126" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.8" />
+            <path d="M89,104 C112,102 118,118 104,126" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.8" />
+          </svg>
+        </div>
+
+        <!-- Telemetry HUD Badges -->
+        <div class="absolute top-2 left-2 telemetry-hud-tag flex items-center space-x-1.5">
+          <i class="fa-solid fa-crosshairs text-[10px]"></i>
+          <span>SYSTEMA SKELETALE</span>
+        </div>
+        <div class="absolute bottom-2 right-2 telemetry-hud-tag flex items-center space-x-1.5">
+          <i class="fa-solid fa-diagram-project text-[10px]"></i>
+          <span>206 SUYAK // 2D VEKTOR</span>
+        </div>
+      </div>
+
+      <!-- Title & Academic Info -->
+      <!-- Title & Academic Info: STEP 1 (WELCOME & CONCEPT) -->
+      <div class="space-y-2.5 max-w-2xl mx-auto">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-xs font-mono text-cyan-400 font-semibold tracking-wide uppercase">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Prof. N.K. Ahmedov akademik darsligi asosida</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight glow-text-cyan">
+          Odam Anatomiyasi <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-rose-400">1-Jild: Raqamli Atlas</span>
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
+          Toshkent Davlat Tibbiyot Instituti professori N.K. Ahmedovning fundamental darsligi asosida tibbiyot talabalari va shifokorlar uchun yaratilgan klinik interaktiv 2D atlas. Suyaklar (Osteologiya) va Muskullar (Miologiya) ta'limoti.
+        </p>
+      </div>
+
+      <!-- Action Buttons: STEP 2 (SECTION SELECTION / BO'LIMLAR) -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 w-full max-w-xl mx-auto">
+        <button id="btn-splash-osteology" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-teal-400 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm transition-all shadow-xl shadow-cyan-500/30 hover:scale-105 active:scale-95 flex items-center justify-center space-x-2 pulse-ring-glow">
+          <i class="fa-solid fa-bone text-slate-950 text-sm"></i>
+          <span>1. Suyaklar (Osteologiya)</span>
+        </button>
+        <button id="btn-splash-myology" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 text-white font-extrabold text-xs sm:text-sm transition-all shadow-xl shadow-rose-500/30 hover:scale-105 active:scale-95 flex items-center justify-center space-x-2">
+          <i class="fa-solid fa-person-running text-white text-sm"></i>
+          <span>2. Muskullar (Miologiya)</span>
+        </button>
+        <button id="btn-splash-start" class="w-full sm:w-auto px-4 py-3.5 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 text-xs sm:text-sm font-semibold transition-all flex items-center justify-center space-x-1.5">
+          <span>Asosiy Hub</span>
+          <i class="fa-solid fa-arrow-right-long text-slate-400 text-xs"></i>
+        </button>
+      </div>
+
+      <!-- Bottom Status -->
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-[11px] font-mono text-slate-400 pt-1">
+        <span><i class="fa-solid fa-bone mr-1.5 text-cyan-400"></i>206 Suyak (5 Modul)</span>
+        <span><i class="fa-solid fa-person-running mr-1.5 text-rose-400"></i>600+ Muskul (5 Bo'lim)</span>
+        <span><i class="fa-solid fa-images mr-1.5 text-amber-400"></i>113 ta Asl Rasm</span>
+        <span><i class="fa-solid fa-language mr-1.5 text-emerald-400"></i>Terminologia Anatomica</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOP HEADER / BRAND BAR (NEO-GLASS & CYBER-MEDICAL) -->
+  <header class="sticky top-0 z-40 cyber-header px-4 lg:px-8 py-3 transition-all">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Logo & Title -->
+      <div class="flex items-center space-x-3.5 cursor-pointer group" onclick="App.switchModule('hub')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-teal-400 to-rose-400 p-0.5 shadow-lg shadow-cyan-500/30 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+          <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center text-cyan-400 text-lg">
+            <i class="fa-solid fa-stethoscope"></i>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/90 px-2 py-0.5 rounded border border-cyan-500/40 shadow-sm">
+              Atlas 1-jild
+            </span>
+            <span class="text-xs text-slate-400 font-mono hidden sm:inline">Prof. N.K. Ahmedov</span>
+          </div>
+          <h1 class="text-base sm:text-lg font-bold text-white leading-tight tracking-tight">
+            Odam Anatomiyasi <span class="text-cyan-400 font-mono text-xs sm:text-sm font-normal">(Osteologia & Myologia)</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Primary Section Navigation Switcher -->
+      <div class="hidden lg:flex items-center space-x-1 p-1 rounded-xl bg-slate-900/90 border border-slate-700/80 shadow-inner">
+        <button id="btn-nav-hub" onclick="App.switchModule('hub')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-300 hover:text-white flex items-center space-x-1.5" title="Asosiy Hub va Bo'limlar">
+          <i class="fa-solid fa-house-medical text-xs"></i>
+          <span>Asosiy Hub</span>
+        </button>
+        <button id="btn-nav-osteology" onclick="App.switchModule('module1')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all active bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center space-x-1.5" title="Suyaklar haqida ta'limot (Osteologiya)">
+          <i class="fa-solid fa-bone text-xs"></i>
+          <span>Suyaklar (Osteologiya)</span>
+        </button>
+        <button id="btn-nav-myology" onclick="App.switchModule('module-myology')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-rose-400 flex items-center space-x-1.5" title="Muskullar haqida ta'limot (Miologiya)">
+          <i class="fa-solid fa-person-running text-xs text-rose-400"></i>
+          <span>Muskullar (Miologiya)</span>
+        </button>
+      </div>
+
+      <!-- Quick Actions: Search & Modals -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <!-- 3-Way Theme Switcher (Kunduzgi / Tungi / Klassik Tibbiy) -->
+        <div id="theme-selector-container" class="theme-switcher-pill flex items-center p-1 rounded-xl shadow-inner" role="group" aria-label="Mavzu tanlash: Kunduzgi, Tungi, Klassik Tibbiy">
+          <button type="button" data-theme-btn="day" title="Kunduzgi rejim (Day Mode: toza yorug' fon, yuqori kontrast)" class="theme-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
+            <i class="fa-solid fa-sun text-amber-500 text-xs"></i>
+            <span class="hidden md:inline">Kunduzgi</span>
+          </button>
+          <button type="button" data-theme-btn="night" title="Tungi rejim (Night Mode: qulay to'q slate/ko'k fon)" class="theme-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5 active">
+            <i class="fa-solid fa-moon text-indigo-400 text-xs"></i>
+            <span class="hidden md:inline">Tungi</span>
+          </button>
+          <button type="button" data-theme-btn="clinical" title="Klassik Tibbiy rejim (Clinical Mode: an'anaviy tibbiy atlas uslubi)" class="theme-btn px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
+            <i class="fa-solid fa-book-medical text-cyan-500 text-xs"></i>
+            <span class="hidden md:inline">Klassik Tibbiy</span>
+          </button>
+        </div>
+
+        <!-- Global Search Button -->
+        <button id="btn-open-search" class="flex items-center space-x-2.5 px-3 sm:px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-cyan-950/40 border border-slate-700 hover:border-cyan-500/40 text-slate-300 text-xs sm:text-sm font-medium transition-all shadow-inner group">
+          <i class="fa-solid fa-magnifying-glass text-cyan-400 group-hover:scale-110 transition-transform"></i>
+          <span class="hidden md:inline">Anatomik qidiruv...</span>
+          <span class="text-[10px] font-mono bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded border border-slate-700">Ctrl+K</span>
+        </button>
+
+        <!-- Study Mode (Active Recall) Toggle Button -->
+        <button id="btn-toggle-study-mode" onclick="App.toggleStudyMode()" class="px-2.5 sm:px-3 py-2 rounded-xl bg-slate-900/80 hover:bg-cyan-950/40 border border-slate-700 hover:border-cyan-500/40 text-slate-300 text-xs font-bold transition-all flex items-center space-x-1.5 shadow-inner" title="O'z-o'zini sinash rejimi (T): Chizmalardagi yozuvlarni yashirish / ko'rsatish">
+          <i class="fa-solid fa-user-graduate text-cyan-400"></i>
+          <span class="hidden md:inline">O'z-o'zini sinash</span>
+          <span class="study-mode-badge text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-cyan-400 border border-cyan-500/30">T</span>
+        </button>
+
+        <!-- Glossary Button -->
+        <button onclick="App.switchModule('module-glossary')" class="px-3 py-2 rounded-xl bg-slate-900/80 hover:bg-cyan-950/40 border border-slate-700 hover:border-cyan-500/40 text-slate-300 text-xs font-bold transition-all flex items-center space-x-1.5">
+          <i class="fa-solid fa-book-bookmark text-amber-400"></i>
+          <span class="hidden sm:inline">Lug'at</span>
+        </button>
+
+        <!-- Quiz Button -->
+        <button onclick="App.switchModule('module-quiz')" class="px-3 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-500 hover:from-cyan-500 hover:to-teal-400 text-slate-950 font-bold text-xs transition-all shadow-md shadow-cyan-500/25 flex items-center space-x-1.5">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Viktorina</span>
+        </button>
+
+        <!-- Original Figures Gallery -->
+        <button onclick="App.switchModule('module-gallery')" class="p-2 sm:px-3 sm:py-2 rounded-xl bg-slate-900/80 hover:bg-cyan-950/40 border border-slate-700 hover:border-cyan-500/40 text-slate-300 text-xs font-bold transition-all flex items-center space-x-1.5" title="Asl rasmlar galereyasi">
+          <i class="fa-solid fa-images text-cyan-400"></i>
+          <span class="hidden lg:inline">Asl Rasmlar (1–113)</span>
+        </button>
+
+        <!-- Admin Panel Button -->
+        <button id="btn-open-admin" onclick="AdminPanel.open()" class="px-2.5 sm:px-3 py-2 rounded-xl bg-slate-900/80 hover:bg-cyan-950/50 border border-slate-700 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-300 text-xs font-bold transition-all flex items-center space-x-1.5 shadow-sm group" title="Admin panel: Viktorina va anatomik ma'lumotlarni boshqarish">
+          <i class="fa-solid fa-gear text-cyan-400 group-hover:rotate-45 transition-transform duration-300"></i>
+          <span class="hidden md:inline">Admin</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- SECONDARY NAVIGATION: DYNAMIC SUB-NAV (OSTEOLOGY OR MYOLOGY) -->
+  <nav class="cyber-nav-bar sticky top-[61px] z-30 px-4 overflow-x-auto">
+    <div class="max-w-7xl mx-auto flex items-center justify-between py-2 min-w-max">
+      
+      <!-- OSTEOLOGY SUB NAVIGATION (5 MODULES) -->
+      <div id="osteology-sub-nav" class="flex items-center space-x-1 sm:space-x-2">
+        <button data-module-target="module1" class="nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border border-transparent flex items-center space-x-2 transition-all active">
+          <i class="fa-solid fa-dna text-cyan-400"></i>
+          <span>1-Modul: Umumiy osteologiya</span>
+        </button>
+        <button data-module-target="module2" class="nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border border-transparent flex items-center space-x-2 text-slate-400 transition-all">
+          <i class="fa-solid fa-arrows-up-down text-emerald-400"></i>
+          <span>2-Modul: Tana skeleti</span>
+        </button>
+        <button data-module-target="module3" class="nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border border-transparent flex items-center space-x-2 text-slate-400 transition-all">
+          <i class="fa-solid fa-hand text-amber-400"></i>
+          <span>3-Modul: Qo'l suyaklari</span>
+        </button>
+        <button data-module-target="module4" class="nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border border-transparent flex items-center space-x-2 text-slate-400 transition-all">
+          <i class="fa-solid fa-shoe-prints text-rose-400"></i>
+          <span>4-Modul: Oyoq suyaklari</span>
+        </button>
+        <button data-module-target="module5" class="nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold border border-transparent flex items-center space-x-2 text-slate-400 transition-all">
+          <i class="fa-solid fa-skull text-purple-400"></i>
+          <span>5-Modul: Bosh skeleti (Cranium)</span>
+        </button>
+      </div>
+
+      <!-- MYOLOGY SUB NAVIGATION (5 CHAPTERS) -->
+      <div id="myology-sub-nav" class="hidden flex items-center space-x-1 sm:space-x-2">
+        <button onclick="ModuleMyology.switchSubSection('general')" data-myology-tab="general" class="myology-subtab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-2 transition-all active bg-cyan-500/20 border-cyan-500/40 text-cyan-300">
+          <i class="fa-solid fa-shapes text-cyan-400"></i>
+          <span>1. Umumiy miologiya va shakllar</span>
+        </button>
+        <button onclick="ModuleMyology.switchSubSection('back-thorax')" data-myology-tab="back-thorax" class="myology-subtab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-2 transition-all text-slate-400">
+          <i class="fa-solid fa-lungs text-emerald-400"></i>
+          <span>2. Orqa va ko'krak (Diafragma)</span>
+        </button>
+        <button onclick="ModuleMyology.switchSubSection('abdomen')" data-myology-tab="abdomen" class="myology-subtab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-2 transition-all text-slate-400">
+          <i class="fa-solid fa-shield text-amber-400"></i>
+          <span>3. Qorin va chov kanali</span>
+        </button>
+        <button onclick="ModuleMyology.switchSubSection('head-neck')" data-myology-tab="head-neck" class="myology-subtab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-2 transition-all text-slate-400">
+          <i class="fa-solid fa-face-smile text-purple-400"></i>
+          <span>4. Bosh va bo'yin</span>
+        </button>
+        <button onclick="ModuleMyology.switchSubSection('limbs')" data-myology-tab="limbs" class="myology-subtab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center space-x-2 transition-all text-slate-400">
+          <i class="fa-solid fa-person-walking text-rose-400"></i>
+          <span>5. Qo'l va oyoq muskullari</span>
+        </button>
+      </div>
+
+      <!-- Quick Switch Direct Button for Mobile -->
+      <div class="lg:hidden flex items-center space-x-1">
+        <button onclick="App.switchModule('module-myology')" class="px-2.5 py-1.5 rounded-lg bg-rose-950/60 text-rose-400 border border-rose-500/40 text-xs font-bold">
+          <i class="fa-solid fa-person-running mr-1"></i>Miologiya
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-12">
+
+    <!-- =========================================================================
+         LANDING PAGE HERO: INTERACTIVE 3D ANATOMICAL SHOWCASE
+         ========================================================================= -->
+    <section id="hero-section" class="hero-gradient-border cyber-hud-card p-6 sm:p-8 lg:p-10 mb-8 overflow-hidden relative">
+      <!-- Background subtle glow & cyber-mesh -->
+      <div class="absolute -right-24 -top-24 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-24 -bottom-24 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
+        
+        <!-- Left Column: STEP 1 (CONCEPT) & STEP 2 (SECTION SELECTION CARDS) -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Badges & Replay Intro -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="inline-flex items-center space-x-2 px-3 py-1 rounded-lg bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 text-xs font-mono font-bold tracking-wider uppercase">
+              <i class="fa-solid fa-graduation-cap text-cyan-400"></i>
+              <span>PROF. N.K. AHMEDOV AKADEMIK ATLASI</span>
+            </span>
+            <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/80 text-slate-300 text-xs font-mono">
+              <i class="fa-solid fa-book-medical text-amber-400"></i>
+              <span>1-jild: Osteologiya & Miologiya</span>
+            </span>
+            <button id="btn-replay-intro" class="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-700 hover:border-cyan-500/40 text-slate-400 hover:text-cyan-300 text-xs font-mono transition-all" title="Kirish animatsiyasini qayta ko'rish">
+              <i class="fa-solid fa-play text-[10px]"></i>
+              <span>Intro</span>
+            </button>
+          </div>
+
+          <!-- STEP 1: Main Academic Concept Headline & Description -->
+          <div class="space-y-3">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              Inson Anatomiyasi <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-rose-400">Klinik Interaktiv Platformasi</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+              Toshkent Davlat Tibbiyot Instituti professori N.K. Ahmedovning fundamental darsligi asosida tibbiyot talabalari, rezidentlar va shifokorlar uchun yaratilgan raqamli atlas. 200 dan ortiq suyaklar va 600 dan ortiq muskullarning yuqori aniqlikdagi 2D vektor anatomiyasi, lotincha xalqaro terminologiya, xirurgik topografiya va amaliy klinik tahlillar.
+            </p>
+          </div>
+
+          <!-- Quick Access Action Buttons -->
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <button onclick="App.switchModule('module-quiz')" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-cyan-500/40 text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 shadow-sm">
+              <i class="fa-solid fa-graduation-cap text-amber-400"></i>
+              <span>Viktorina (15 savol)</span>
+            </button>
+            <button onclick="App.switchModule('module-gallery')" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-cyan-500/40 text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 shadow-sm">
+              <i class="fa-solid fa-images text-cyan-400"></i>
+              <span>Asl Rasmlar (1–113)</span>
+            </button>
+            <button onclick="App.toggleStudyMode()" class="px-4 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-amber-400 text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 shadow-sm">
+              <i class="fa-solid fa-user-graduate text-amber-400"></i>
+              <span>O'z-o'zini sinash (T)</span>
+            </button>
+          </div>
+
+          <!-- STEP 2: SECTION SELECTION CARDS (OSTEOLOGY & MYOLOGY) -->
+          <div class="pt-3 border-t border-slate-800/80 space-y-3">
+            <div class="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold flex items-center justify-between">
+              <span>ASOSIY ANATOMIK BO'LIMNI TANLANG:</span>
+              <span class="text-[11px] text-cyan-400 lowercase">2 ta fundamental bo'lim</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Section 1 Card: Osteology -->
+              <div class="section-hub-card p-4 sm:p-5 flex flex-col justify-between group">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 text-[10px] font-mono font-bold uppercase">
+                      <i class="fa-solid fa-bone text-cyan-400"></i>
+                      <span>1-Bo'lim • Osteologia</span>
+                    </span>
+                    <span class="text-[10px] font-mono text-slate-400">4–53-betlar</span>
+                  </div>
+                  <h4 class="text-base sm:text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    Suyaklar haqida ta'limot (Osteologiya)
+                  </h4>
+                  <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                    Skeletning 200 dan ortiq suyaklari, osteon mikrotuzilishi, kalla chuqurchalari, umurtqa pog'onasi hamda erkin qo'l va oyoq suyaklari.
+                  </p>
+                  <div class="flex flex-wrap gap-1 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-900 text-cyan-300 text-[10px] font-mono border border-cyan-500/20">5 ta Modul</span>
+                    <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-[10px] font-mono border border-slate-800">206 Suyak</span>
+                    <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-[10px] font-mono border border-slate-800">2D Vektor Pinlar</span>
+                  </div>
+                </div>
+                <div class="pt-4">
+                  <button onclick="App.switchModule('module1')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-400 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs transition-all shadow-md shadow-cyan-500/25 flex items-center justify-center space-x-2">
+                    <span>Suyaklar bo'limini boshlash</span>
+                    <i class="fa-solid fa-arrow-right-long text-xs"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Section 2 Card: Myology -->
+              <div class="section-hub-card card-myology p-4 sm:p-5 flex flex-col justify-between group">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded bg-rose-950/80 border border-rose-500/30 text-rose-400 text-[10px] font-mono font-bold uppercase">
+                      <i class="fa-solid fa-person-running text-rose-400"></i>
+                      <span>2-Bo'lim • Myologia</span>
+                    </span>
+                    <span class="text-[10px] font-mono text-slate-400">114–220-rasmlar</span>
+                  </div>
+                  <h4 class="text-base sm:text-lg font-bold text-white group-hover:text-rose-300 transition-colors">
+                    Muskullar haqida ta'limot (Miologiya)
+                  </h4>
+                  <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                    600 dan ortiq muskul, shakllar klassifikatsiyasi, orqa, ko'krak, diafragma, qorin devori, chov kanali va churralar, mimika va oyoq-qo'l muskullari.
+                  </p>
+                  <div class="flex flex-wrap gap-1 mt-3">
+                    <span class="px-2 py-0.5 rounded bg-slate-900 text-rose-300 text-[10px] font-mono border border-rose-500/20">5 ta Bo'lim</span>
+                    <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-[10px] font-mono border border-slate-800">600+ Muskul</span>
+                    <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-[10px] font-mono border border-slate-800">Chov & Diafragma</span>
+                  </div>
+                </div>
+                <div class="pt-4">
+                  <button onclick="App.switchModule('module-myology')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 text-white font-extrabold text-xs transition-all shadow-md shadow-rose-500/25 flex items-center justify-center space-x-2">
+                    <span>Muskullar bo'limini boshlash</span>
+                    <i class="fa-solid fa-arrow-right-long text-xs"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        </div>
+
+        <!-- Right Column: Interactive 2D Anatomical Vector Showcase -->
+        <div class="lg:col-span-5 flex flex-col items-center">
+          <div class="w-full glass-panel cyber-hud-card p-5 rounded-3xl border border-cyan-500/40 relative overflow-hidden bg-slate-950/70 shadow-2xl flex flex-col items-center">
+            
+            <!-- Top Controls Toolbar in Hero Viewport -->
+            <div class="w-full flex items-center justify-between pb-3 mb-2 border-b border-slate-800 text-xs">
+              <div class="flex items-center space-x-2 text-cyan-400 font-mono font-bold">
+                <i class="fa-solid fa-diagram-project"></i>
+                <span class="tracking-wider uppercase text-[11px]">Systema skeletale (2D)</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-[10px] font-mono text-cyan-300">
+                1–2-rasmlar
+              </span>
+            </div>
+
+            <!-- Crisp 2D Anatomical Skeleton Vector Illustration -->
+            <div id="hero-2d-showcase" class="w-full flex justify-center py-2 relative">
+              <svg viewBox="0 0 280 420" class="w-full max-h-[360px] h-auto select-none filter drop-shadow-[0_8px_20px_rgba(56,189,248,0.35)]">
+                <!-- Cranium -->
+                <g class="cursor-pointer group" onclick="App.switchModule('module5')">
+                  <path d="M140,24 C124,24 116,36 116,50 C116,62 122,70 128,74 L128,82 C134,84 146,84 152,82 L152,74 C158,70 164,62 164,50 C164,36 156,24 140,24 Z" fill="#e2e8f0" stroke="#38bdf8" stroke-width="1.6" class="group-hover:fill-cyan-200 transition-all" />
+                  <ellipse cx="132" cy="50" rx="4.5" ry="5.5" fill="#090d16" />
+                  <ellipse cx="148" cy="50" rx="4.5" ry="5.5" fill="#090d16" />
+                  <!-- Pin 1 -->
+                  <circle cx="168" cy="40" r="7" fill="#0284c7" stroke="#38bdf8" stroke-width="1.2" />
+                  <text x="168" y="42.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#fff">1</text>
+                </g>
+
+                <!-- Truncus: Spine & Ribcage -->
+                <g class="cursor-pointer group" onclick="App.switchModule('module2')">
+                  <!-- Cervical Spine -->
+                  <rect x="136" y="82" width="8" height="18" rx="2" fill="#cbd5e1" stroke="#64748b" stroke-width="0.8" />
+                  <!-- Clavicles -->
+                  <path d="M140,100 Q118,92 95,102" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" fill="none" />
+                  <path d="M140,100 Q162,92 185,102" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" fill="none" />
+                  <!-- Sternum -->
+                  <polygon points="135,102 145,102 143,115 137,115" fill="#cbd5e1" stroke="#38bdf8" stroke-width="0.8" />
+                  <polygon points="137,116 143,116 142,154 138,154" fill="#e2e8f0" stroke="#38bdf8" stroke-width="0.8" />
+                  <!-- Ribs -->
+                  <path d="M136,110 C110,100 95,118 106,132 L137,122" stroke="#cbd5e1" stroke-width="2.2" fill="none" />
+                  <path d="M144,110 C170,100 185,118 174,132 L143,122" stroke="#cbd5e1" stroke-width="2.2" fill="none" />
+                  <path d="M136,124 C104,118 88,138 106,152 L137,135" stroke="#cbd5e1" stroke-width="2.2" fill="none" />
+                  <path d="M144,124 C176,118 192,138 174,152 L143,135" stroke="#cbd5e1" stroke-width="2.2" fill="none" />
+                  <path d="M136,138 C102,135 88,158 105,172 L137,148" stroke="#cbd5e1" stroke-width="2.2" fill="none" />
+                  <path d="M144,138 C178,135 192,158 175,172 L143,148" stroke="#cbd5e1" stroke-width="2.2" fill="none" />
+                  <!-- Lumbar -->
+                  <rect x="135" y="166" width="10" height="38" rx="2" fill="#cbd5e1" stroke="#38bdf8" stroke-width="0.8" />
+                  <!-- Pin 2 -->
+                  <circle cx="120" cy="140" r="7" fill="#0284c7" stroke="#38bdf8" stroke-width="1.2" />
+                  <text x="120" y="142.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#fff">2</text>
+                </g>
+
+                <!-- Upper Limbs -->
+                <g class="cursor-pointer group" onclick="App.switchModule('module3')">
+                  <!-- Left Arm -->
+                  <circle cx="90" cy="112" r="5.5" fill="#94a3b8" />
+                  <line x1="88" y1="115" x2="78" y2="175" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round" />
+                  <circle cx="77" cy="178" r="4.5" fill="#94a3b8" />
+                  <line x1="75" y1="181" x2="66" y2="238" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round" />
+                  <line x1="79" y1="181" x2="70" y2="238" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round" />
+                  <ellipse cx="68" cy="244" rx="4.5" ry="3.5" fill="#94a3b8" />
+                  <!-- Right Arm -->
+                  <circle cx="190" cy="112" r="5.5" fill="#94a3b8" />
+                  <line x1="192" y1="115" x2="202" y2="175" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round" />
+                  <circle cx="203" cy="178" r="4.5" fill="#94a3b8" />
+                  <line x1="205" y1="181" x2="214" y2="238" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round" />
+                  <line x1="201" y1="181" x2="210" y2="238" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round" />
+                  <ellipse cx="212" cy="244" rx="4.5" ry="3.5" fill="#94a3b8" />
+                  <!-- Pin 3 -->
+                  <circle cx="62" cy="150" r="7" fill="#0284c7" stroke="#38bdf8" stroke-width="1.2" />
+                  <text x="62" y="152.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#fff">3</text>
+                </g>
+
+                <!-- Lower Limbs & Pelvis -->
+                <g class="cursor-pointer group" onclick="App.switchModule('module4')">
+                  <!-- Pelvis -->
+                  <path d="M116,206 Q140,200 164,206 Q174,225 162,246 Q150,252 140,250 Q130,252 118,246 Q106,225 116,206 Z" fill="#e2e8f0" stroke="#38bdf8" stroke-width="1.4" />
+                  <ellipse cx="131" cy="238" rx="5.5" ry="7" fill="#090d16" />
+                  <ellipse cx="149" cy="238" rx="5.5" ry="7" fill="#090d16" />
+                  <!-- Left Leg -->
+                  <circle cx="116" cy="234" r="5.5" fill="#94a3b8" />
+                  <line x1="116" y1="234" x2="120" y2="318" stroke="#e2e8f0" stroke-width="8" stroke-linecap="round" />
+                  <circle cx="120" cy="322" r="5" fill="#cbd5e1" stroke="#38bdf8" stroke-width="0.8" />
+                  <line x1="119" y1="327" x2="116" y2="395" stroke="#cbd5e1" stroke-width="6.5" stroke-linecap="round" />
+                  <line x1="125" y1="330" x2="123" y2="394" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+                  <ellipse cx="116" cy="402" rx="5" ry="4" fill="#94a3b8" />
+                  <!-- Right Leg -->
+                  <circle cx="164" cy="234" r="5.5" fill="#94a3b8" />
+                  <line x1="164" y1="234" x2="160" y2="318" stroke="#e2e8f0" stroke-width="8" stroke-linecap="round" />
+                  <circle cx="160" cy="322" r="5" fill="#cbd5e1" stroke="#38bdf8" stroke-width="0.8" />
+                  <line x1="161" y1="327" x2="164" y2="395" stroke="#cbd5e1" stroke-width="6.5" stroke-linecap="round" />
+                  <line x1="155" y1="330" x2="157" y2="394" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+                  <ellipse cx="164" cy="402" rx="5" ry="4" fill="#94a3b8" />
+                  <!-- Pin 4 -->
+                  <circle cx="182" cy="285" r="7" fill="#0284c7" stroke="#38bdf8" stroke-width="1.2" />
+                  <text x="182" y="287.5" text-anchor="middle" font-size="7" font-weight="bold" fill="#fff">4</text>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Floating Anatomical Labels in Hero Viewport -->
+            <div class="w-full flex items-center justify-between text-[11px] font-mono text-slate-400 pt-2 border-t border-slate-800/80">
+              <span class="flex items-center text-cyan-400"><i class="fa-solid fa-hand-pointer mr-1.5 animate-pulse"></i>Sohaga bosing</span>
+              <span class="text-slate-300 font-semibold">1–4 Interaktiv Pinlar</span>
+            </div>
+
+          </div>
+
+          <!-- Bottom Stat Badges under 2D Viewport -->
+          <div class="grid grid-cols-3 gap-3 w-full mt-3">
+            <div class="glass-panel p-2.5 rounded-xl border border-slate-800 text-center">
+              <div class="text-base font-extrabold text-cyan-400">206+</div>
+              <div class="text-[10px] text-slate-400 font-mono">Suyaklar jami</div>
+            </div>
+            <div class="glass-panel p-2.5 rounded-xl border border-slate-800 text-center">
+              <div class="text-base font-extrabold text-teal-400">113 ta</div>
+              <div class="text-[10px] text-slate-400 font-mono">Asl rasmlar</div>
+            </div>
+            <div class="glass-panel p-2.5 rounded-xl border border-slate-800 text-center">
+              <div class="text-base font-extrabold text-amber-400">100%</div>
+              <div class="text-[10px] text-slate-400 font-mono">Lotin / O'zbek</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Anchoring container for modules scrolling -->
+    <div id="modules-container"></div>
+
+    <!-- =========================================================================
+         MODULE 1: GENERAL OSTEOLOGY & BONE STRUCTURE (Figs 1–4, Pages 4–7)
+         ========================================================================= -->
+    <section id="module1" class="module-section space-y-10">
+      
+      <!-- Module Header -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/30 relative overflow-hidden bg-gradient-to-r from-surface via-surface to-cyan-950/30">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2.5 text-cyan-400 text-xs font-mono mb-2">
+              <span class="px-2.5 py-1 rounded bg-cyan-950/80 border border-cyan-500/30 font-bold uppercase">1-Modul</span>
+              <span>1–4-rasmlar, 4–7-betlar</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Umumiy osteologiya va suyakning nozik tuzilishi
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 mt-2 max-w-3xl leading-relaxed">
+              Skelet (yunoncha "skeletos" — quritilgan) organizmda tayanch, harakat va himoya vazifasini bajaruvchi 200 dan ortiq suyaklar yig'indisidir. Suyakning kimyoviy tarkibi, mikroskopik qatlamlari va yoshga doir o'zgarishlari.
+            </p>
+          </div>
+          <div class="shrink-0">
+            <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
+              <div class="text-2xl font-extrabold text-cyan-400">8–10%</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">Gavda og'irligiga nisbati</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Main Functions Cards Grid -->
+      <div>
+        <h3 class="text-lg font-bold text-slate-200 mb-4 flex items-center space-x-2">
+          <i class="fa-solid fa-shield-heart text-cyan-400"></i>
+          <span>Skeletning 3 ta asosiy fiziologik vazifasi (Ahmedov, 5-bet)</span>
+        </h3>
+        <div id="m1-functions-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
+      </div>
+
+      <!-- Interactive Skeleton Map (Figs. 1, 2) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+          <div>
+            <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">INTERAKTIV 2D VEKTOR SKELET XARITASI (ANATOMIK NAMUNA)</div>
+            <h3 id="skeleton-figure-caption" class="text-xl font-bold text-white">
+              1-rasm. Odam skeleti (old tomondan ko'rinishi)
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">
+              Skelet sohalarini bosib, ularning tuzilishi va modullariga avtomatik o'ting (Old va orqa proyeksiyalarda ko'ring)
+            </p>
+          </div>
+          <div class="flex items-center space-x-3">
+            <button id="btn-toggle-skeleton-view" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-cyan-500/30 text-xs font-bold text-slate-200 transition-all flex items-center shadow-md">
+              <i class="fa-solid fa-arrows-rotate mr-2 text-cyan-400"></i>
+              <span>Orqa tomondan ko'rish (2-rasm)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Skeleton Visual 3D Specimen Viewport -->
+          <div class="lg:col-span-7 flex justify-center bg-slate-950/60 p-2 sm:p-4 rounded-2xl border border-slate-800/80">
+            <div id="skeleton-svg-wrapper" class="w-full min-h-[580px] lg:min-h-[640px]"></div>
+          </div>
+
+          <!-- Region Detail & Zoom Navigator -->
+          <div class="lg:col-span-5 space-y-4">
+            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider font-semibold">Tanlangan soha ma'lumotlari:</div>
+            <div id="skeleton-region-detail">
+              <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-slate-400 text-sm">
+                Skelet ustidagi istalgan hududni (Bosh, Tana, Qo'l yoki Oyoq) bosing.
+              </div>
+            </div>
+
+            <!-- Region Shortcuts -->
+            <div class="grid grid-cols-2 gap-2.5 pt-2">
+              <button onclick="Module1.selectSkeletonRegion('cranium')" class="p-3 rounded-xl bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-500/40 text-left text-xs transition-all">
+                <div class="font-bold text-white">Bosh skeleti</div>
+                <div class="text-[10px] text-cyan-400 font-mono italic">Cranium (23 ta)</div>
+              </button>
+              <button onclick="Module1.selectSkeletonRegion('truncus')" class="p-3 rounded-xl bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-500/40 text-left text-xs transition-all">
+                <div class="font-bold text-white">Tana skeleti</div>
+                <div class="text-[10px] text-emerald-400 font-mono italic">Truncus (Umurtqa+Ko'krak)</div>
+              </button>
+              <button onclick="Module1.selectSkeletonRegion('upper')" class="p-3 rounded-xl bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-500/40 text-left text-xs transition-all">
+                <div class="font-bold text-white">Qo'l suyaklari</div>
+                <div class="text-[10px] text-amber-400 font-mono italic">Membrum superius (64 ta)</div>
+              </button>
+              <button onclick="Module1.selectSkeletonRegion('lower')" class="p-3 rounded-xl bg-slate-900/60 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-500/40 text-left text-xs transition-all">
+                <div class="font-bold text-white">Oyoq suyaklari</div>
+                <div class="text-[10px] text-rose-400 font-mono italic">Membrum inferius (62 ta)</div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Internal Bone Anatomy (Figs. 3, 4): Longitudinal cross-section of Tibia & Explode Layers -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+          <div>
+            <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">SUYAK GISTOLOGIK VA ANATOMIK QATLAMLARI</div>
+            <h3 class="text-xl font-bold text-white">
+              3, 4-rasmlar. Katta boldir suyagining bo'yiga kesilgani va periost qatlamlari
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">
+              Epifiz, diafiz, metafiz, periost (fibroz va osteogen qavatlar), zich va g'ovak modda
+            </p>
+          </div>
+          <div>
+            <button id="btn-explode-tibia" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-lg shadow-cyan-500/25 flex items-center">
+              <i class="fa-solid fa-layer-group mr-2"></i>
+              <span>Qatlamlarni ajratish (Explode Layers)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Tibia Interactive SVG Diagram -->
+          <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="tibia-svg-wrapper" class="w-full max-w-md"></div>
+          </div>
+
+          <!-- Layers List and Detail Inspector -->
+          <div class="lg:col-span-5 space-y-4">
+            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider font-semibold">Qatlamlar va teshiklar ro'yxati:</div>
+            <div id="tibia-layer-list" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
+            <div id="tibia-layer-detail">
+              <div class="glass-panel p-4 rounded-xl border border-slate-800 text-slate-400 text-xs">
+                Qatlam ustiga bosing yoki raqamli pindagi ma'lumotlarni ko'ring.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- "Age & Chemical Composition" Simulator (Canvas Bending Test & Deficiencies) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">BIOMEXANIK VA KIMYOVIY SIMULYATOR</div>
+          <h3 class="text-xl font-bold text-white">
+            Suyakning kimyoviy tarkibi, yoshga doir elastikligi va sinish simulyatori
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">
+            1/3 Organik modda (ossein) va 2/3 Anorganik modda (kalsiy fosfat 51.04%) nisbatining yoshga qarab o'zgarishi
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Controls & Composition Stats -->
+          <div class="lg:col-span-5 space-y-6">
+            
+            <!-- Age Stage Slider -->
+            <div class="p-5 rounded-2xl bg-slate-900/70 border border-slate-800">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-bold text-white flex items-center space-x-2">
+                  <i class="fa-solid fa-timeline text-cyan-400"></i>
+                  <span>Yosh bosqichini tanlang:</span>
+                </label>
+                <span id="age-stage-title" class="text-xs font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded border border-amber-500/30">
+                  Yetuk / O'rta yosh
+                </span>
+              </div>
+              <input id="age-slider" type="range" min="0" max="2" step="1" value="1" class="w-full my-3">
+              <div class="flex justify-between text-[11px] font-mono text-slate-400">
+                <span>Yosh bola</span>
+                <span>O'rta yosh</span>
+                <span>Keksa odam</span>
+              </div>
+              <p id="age-stage-desc" class="text-xs text-slate-300 mt-3 leading-relaxed"></p>
+            </div>
+
+            <!-- Chemical Ratio Bars -->
+            <div class="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-4">
+              <div class="text-xs font-bold text-slate-200">Kimyoviy moddalar balansi (Ahmedov, 5-bet):</div>
+              
+              <!-- Organic (Ossein) -->
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-emerald-400 font-medium">Organik modda (Ossein, muguz modda):</span>
+                  <span id="age-organic-val" class="font-mono font-bold text-emerald-300">33.3%</span>
+                </div>
+                <div class="h-2.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                  <div id="age-organic-bar" class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: 33.3%;"></div>
+                </div>
+              </div>
+
+              <!-- Inorganic (Minerals) -->
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-cyan-400 font-medium">Anorganik modda (Kalsiy fosfat 51.04%):</span>
+                  <span id="age-inorganic-val" class="font-mono font-bold text-cyan-300">66.7%</span>
+                </div>
+                <div class="h-2.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                  <div id="age-inorganic-bar" class="h-full bg-cyan-500 rounded-full transition-all duration-300" style="width: 66.7%;"></div>
+                </div>
+              </div>
+
+              <!-- Mechanical Status Badges -->
+              <div class="grid grid-cols-2 gap-2 pt-2 text-center text-xs">
+                <div class="p-2 rounded-lg bg-slate-950 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Elastiklik xossasi:</span>
+                  <span id="age-elasticity-badge" class="font-bold text-emerald-400">Optimal</span>
+                </div>
+                <div class="p-2 rounded-lg bg-slate-950 border border-slate-800">
+                  <span class="text-slate-400 block text-[10px]">Mo'rtlik va sinuvchanlik:</span>
+                  <span id="age-fragility-badge" class="font-bold text-amber-400">Minimal</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vitamin Deficiency Toggles -->
+            <div class="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-3">
+              <div class="text-xs font-bold text-slate-200">Vitamin yetishmovchiligi patologiyasi (Ahmedov, 6-bet):</div>
+              <div class="flex space-x-2">
+                <button id="toggle-vit-d" class="flex-1 py-2 px-3 rounded-xl bg-amber-950/40 hover:bg-amber-900/50 border border-amber-500/40 text-amber-300 text-xs font-bold transition-all">
+                  <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Vitamin D (Raxit)
+                </button>
+                <button id="toggle-vit-a" class="flex-1 py-2 px-3 rounded-xl bg-cyan-950/40 hover:bg-cyan-900/50 border border-cyan-500/40 text-cyan-300 text-xs font-bold transition-all">
+                  <i class="fa-solid fa-bone mr-1.5"></i> Vitamin A kamligi
+                </button>
+              </div>
+              <div id="vit-info-box"></div>
+            </div>
+
+          </div>
+
+          <!-- Interactive Bending Canvas Test -->
+          <div class="lg:col-span-7 space-y-4">
+            <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800">
+              <div class="flex items-center justify-between mb-3">
+                <div class="text-xs font-bold text-white flex items-center space-x-2">
+                  <i class="fa-solid fa-weight-hanging text-amber-400"></i>
+                  <span>Mexanik yuklama (Kuch bering va bukilishni kuzating):</span>
+                </div>
+                <span id="force-val-label" class="text-xs font-mono font-bold text-amber-400 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-500/30">0 N</span>
+              </div>
+              <input id="force-slider" type="range" min="0" max="150" value="0" class="w-full">
+            </div>
+
+            <!-- Canvas Viewport -->
+            <div class="aspect-[16/10] w-full rounded-2xl overflow-hidden border border-cyan-500/20 bg-slate-950 p-2 relative">
+              <canvas id="bone-bending-canvas" class="anatomy-canvas"></canvas>
+            </div>
+            <div class="text-[11px] text-slate-400 flex items-center justify-between px-2">
+              <span>* Keksa odam suyagiga kuch berilganda ossein yetishmovchiligi tufayli mo'rt sinish sodir bo'ladi.</span>
+              <span class="text-cyan-400 font-mono">Ahmedov 5-6 betlar</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Bone Classification Cards -->
+      <div>
+        <div class="mb-6">
+          <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">SUYAKLARNING SHAKLI VA TUZILISHI BO'YICHA TASNIFI</div>
+          <h3 class="text-xl font-bold text-white">Suyaklar tasnifi (Ahmedov, 7-bet)</h3>
+          <p class="text-xs text-slate-400 mt-1">Naysimon, g'ovak, yassi va aralash suyaklar</p>
+        </div>
+        <div id="classification-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         MODULE 2: TRUNK SKELETON / TANA SKELETI (Figs 5–22, Pages 7–14)
+         ========================================================================= -->
+    <section id="module2" class="module-section space-y-10 hidden">
+      
+      <!-- Module Header -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-emerald-500/30 relative overflow-hidden bg-gradient-to-r from-surface via-surface to-emerald-950/30">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2.5 text-emerald-400 text-xs font-mono mb-2">
+              <span class="px-2.5 py-1 rounded bg-emerald-950/80 border border-emerald-500/30 font-bold uppercase">2-Modul</span>
+              <span>5–22-rasmlar, 7–14-betlar</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Tana skeleti: Umurtqa pog'onasi va Ko'krak qafasi
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 mt-2 max-w-3xl leading-relaxed">
+              Umurtqa pog'onasi (columna vertebralis) 33–34 ta umurtqadan iborat bo'lib, orqa miyani himoyalaydi va vertikal gavda tayanchini tashkil etadi. Atlant va aksis aylanish mexanizmi hamda ko'krak qafasi suyaklari.
+            </p>
+          </div>
+          <div class="shrink-0">
+            <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
+              <div class="text-2xl font-extrabold text-emerald-400">33–34</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">Umurtqalar soni</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Animated Vertebral Column (Columna vertebralis, Figs 5-19) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+          <div>
+            <div class="text-xs font-mono text-emerald-400 font-semibold mb-1">UMURTQA POG'ONASI UZUNLIGI VA BO'LIMLARI</div>
+            <h3 class="text-xl font-bold text-white">
+              Columna vertebralis: 5 ta bo'lim va fiziologik egriliklar
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">
+              Bo'yin (7), ko'krak (12), bel (5), dumg'aza (5 birlashgan) va dum (4-5) umurtqalari
+            </p>
+          </div>
+          <div class="flex items-center space-x-3">
+            <button id="btn-toggle-spine-gender" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-emerald-500/30 text-xs font-bold text-slate-200 transition-all flex items-center shadow-md">
+              <i class="fa-solid fa-venus-mars mr-2 text-emerald-400"></i>
+              <span id="spine-gender-label">Erkaklar umurtqasi (73–75 sm)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Vertebral Column 3D PBR Medical Specimen -->
+          <div class="lg:col-span-5 flex justify-center bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
+            <div id="spine-svg-container" class="w-full min-h-[560px]"></div>
+          </div>
+
+          <!-- Vertebral Regional Stats and Selected Vertebra Details -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="flex items-center justify-between p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
+              <div>
+                <span class="text-xs text-slate-400">Umumiy o'rtacha uzunligi:</span>
+                <div id="spine-total-len-val" class="text-2xl font-extrabold text-emerald-400 mt-0.5">73–75 sm</div>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-slate-400">Fiziologik egriliklar:</span>
+                <div class="text-xs font-bold text-white mt-1">Lordoz (bo'yin, bel) & Kifoz (ko'krak, dumg'aza)</div>
+              </div>
+            </div>
+
+            <!-- Regional Cards Breakdown -->
+            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider font-semibold">Bo'limlar bo'yicha uzunlik taqsimoti:</div>
+            <div id="spine-regions-breakdown" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+
+            <!-- Selected Vertebra Inspector Box -->
+            <div class="pt-2">
+              <div class="text-xs font-mono uppercase text-slate-400 tracking-wider font-semibold mb-2">Tanlangan umurtqa anatomiyasi:</div>
+              <div id="spine-vertebra-detail">
+                <div class="glass-panel p-4 rounded-xl border border-slate-800 text-slate-400 text-xs">
+                  Umurtqa ustiga bosing (masalan: C1 Atlant, C2 Aksis, C6 Uyqu do'mbog'i, C7 Prominens yoki Th/L umurtqalar).
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2D/3D Vertebra Constructor (Umurtqa qismlari va Kanali) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+          <div>
+            <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">INTERAKTIV QISMLAR KONSTRUKTORI</div>
+            <h3 class="text-xl font-bold text-white">
+              5, 6-rasmlar. Umurtqa tuzilishi va orqa miya kanali (Canalis vertebralis)
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">
+              Corpus, arcus, processus spinosus, processus transversus va foramina intervertebralia
+            </p>
+          </div>
+          <div>
+            <button id="btn-assemble-vertebra" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-lg shadow-cyan-500/25 flex items-center">
+              <i class="fa-solid fa-puzzle-piece mr-2"></i>
+              <span>Konstruktorni ajratish (Explode)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="vertebra-parts-canvas-container" class="w-full max-w-lg"></div>
+          </div>
+          <div class="lg:col-span-5 space-y-4">
+            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider font-semibold">Umurtqa qismi tavsifi:</div>
+            <div id="vertebra-part-info">
+              <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-slate-400 text-sm">
+                Umurtqa qismlariga bosing (Tana, ravoq, o'siqlar yoki umurtqa teshigi).
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Atlas & Axis Rotation Simulator (Figs. 10–13) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+          <div>
+            <div class="text-xs font-mono text-amber-400 font-semibold mb-1">BO'YINNING NOYOQ AYLANISH BIOMEXANIKASI</div>
+            <h3 class="text-xl font-bold text-white">
+              10–13-rasmlar. Atlant va Aksisning tish atrofida aylanish simulyatori
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">
+              I bo'yin umurtqasi (atlant) II bo'yin umurtqasi tishsimon o'sig'i (dens axis) atrofida aylanadi
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Rotation Svg -->
+          <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="atlas-axis-svg-container" class="w-full max-w-md"></div>
+          </div>
+
+          <!-- Controls & Medical Explanations -->
+          <div class="lg:col-span-5 space-y-5">
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-bold text-white flex items-center space-x-2">
+                  <i class="fa-solid fa-rotate text-amber-400"></i>
+                  <span>Boshni burish burchagi:</span>
+                </label>
+                <span id="atlas-angle-val" class="text-sm font-mono font-bold text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded border border-amber-500/30">0°</span>
+              </div>
+              <input id="atlas-rotation-slider" type="range" min="-75" max="75" value="0" class="w-full my-3">
+              <div class="flex justify-between text-[11px] font-mono text-slate-400">
+                <span>◀ Chapga burilish (-75°)</span>
+                <span>O'ngga burilish (+75°) ▶</span>
+              </div>
+            </div>
+
+            <!-- Clinical Special Vertebrae Note -->
+            <div class="glass-panel p-5 rounded-2xl border border-amber-500/30 text-xs text-slate-300 space-y-3">
+              <div>
+                <span class="font-bold text-amber-300 block mb-0.5">VI bo'yin umurtqasi (C6) — Uyqu do'mbog'i:</span>
+                <span>Tuberculum caroticum do'mbog'iga umumiy uyqu arteriyasini qisib, qon ketganda zudlik bilan to'xtatish mumkin (Ahmedov, 8-bet).</span>
+              </div>
+              <div>
+                <span class="font-bold text-cyan-300 block mb-0.5">VII bo'yin umurtqasi (C7) — Bo'rtib chiquvchi umurtqa:</span>
+                <span>Vertebra prominens o'sig'i eng uzun va yo'g'on bo'lib, bo'yin terisi ostida yaqqol sezilib turadi (9-rasm).</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thoracic Cage: Sternum & Ribs (Figs. 20–22) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+          <div>
+            <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">KO'KRAK QAFASI ANATOMIYASI VA NAFAS DINAMIKASI</div>
+            <h3 class="text-xl font-bold text-white">
+              20–22-rasmlar. To'sh suyagi (Sternum) va 12 juft qovurg'alar
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">
+              Chin (I–VII), yolg'on (VIII–X) va yetim (XI–XII) qovurg'alar hamda to'sh qismlari
+            </p>
+          </div>
+          <div>
+            <button id="btn-toggle-breathing" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-lg shadow-cyan-500/25 flex items-center">
+              <i class="fa-solid fa-lungs mr-2"></i>
+              <span>Nafas olish harakatini animatsiya qilish</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Filter Buttons for Rib Categories -->
+          <div id="rib-filter-buttons" class="flex flex-wrap gap-2.5"></div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+              <div id="thorax-svg-container" class="w-full min-h-[480px]"></div>
+            </div>
+            <div class="lg:col-span-5 space-y-4">
+              <div class="text-xs font-mono uppercase text-slate-400 tracking-wider font-semibold">To'sh suyagi va qovurg'alar ma'lumotlari:</div>
+              <div id="thorax-part-info">
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-slate-400 text-sm">
+                  To'sh suyagi (Sternum) ustiga bosing yoki yuqoridagi qovurg'a filtrlari orqali chin, yolg'on va yetim qovurg'alarni alohida ajratib ko'ring.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         MODULE 3: UPPER LIMB BONES / QO'L SUYAKLARI (Figs 23–45, Pages 15–22)
+         ========================================================================= -->
+    <section id="module3" class="module-section space-y-10 hidden">
+      
+      <!-- Module Header -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-amber-500/30 relative overflow-hidden bg-gradient-to-r from-surface via-surface to-amber-950/30">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2.5 text-amber-400 text-xs font-mono mb-2">
+              <span class="px-2.5 py-1 rounded bg-amber-950/80 border border-amber-500/30 font-bold uppercase">3-Modul</span>
+              <span>23–45-rasmlar, 15–22-betlar</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Qo'l suyaklari (Ossa membri superioris)
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 mt-2 max-w-3xl leading-relaxed">
+              Yelka kamari (o'mrov va kurak suyaklari), erkin qo'l suyaklari (yelka, bilak va tirsak — pronatsiya va supinatsiya biomexanikasi) hamda qo'l panjasining 27 ta suyaklari (kaft usti, kaft va falangalar).
+            </p>
+          </div>
+          <div class="shrink-0">
+            <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
+              <div class="text-2xl font-extrabold text-amber-400">64 ta</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">Suyaklar soni</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shoulder Girdle: Clavicle & Scapula (Figs. 24–27) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">YELKA KAMARI SUYAKLARI</div>
+          <h3 class="text-xl font-bold text-white">
+            24–27-rasmlar. O'mrov (Clavicula) va Kurak (Scapula) suyaklari
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">
+            Akromion, tumshuqsimon o'siq (processus coracoideus), cavitas glenoidalis va kurak qiri (spina scapulae)
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="shoulder-girdle-svg-container" class="w-full min-h-[450px]"></div>
+          </div>
+          <div class="lg:col-span-5 space-y-4">
+            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider font-semibold">Tuzilmalar tavsifi:</div>
+            <div id="shoulder-part-info"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Upper Limb: Humerus & Forearm (Pronation / Supination Rotation) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+          <div>
+            <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">ERKIN QO'L VA BILAK BIOMEXANIKASI</div>
+            <h3 class="text-xl font-bold text-white">
+              28–35-rasmlar. Yelka (Humerus) va Bilak suyaklarining o'zaro aylanishi
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">
+              Pronatsiya (kaft pastga) va Supinatsiya (kaft tepaga): Radius suyagining Ulna ustidan qiya kesib o'tishi
+            </p>
+          </div>
+          <div>
+            <button id="btn-toggle-pronation" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-lg shadow-cyan-500/25 flex items-center">
+              <i class="fa-solid fa-arrows-rotate mr-2"></i>
+              <span>Pronatsiya (Kaft pastga)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="forearm-svg-container" class="w-full max-w-md"></div>
+          </div>
+          <div class="lg:col-span-5 space-y-4">
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-xs text-slate-300 space-y-3">
+              <h4 class="text-sm font-bold text-white flex items-center space-x-2">
+                <i class="fa-solid fa-triangle-exclamation text-rose-400"></i>
+                <span>Jarrohlik bo'yinchasi (Collum chirurgicum):</span>
+              </h4>
+              <p class="leading-relaxed">
+                Yelka suyagi boshchasidan pastda joylashgan bo'lib, uning eng nozik va amaliyotda eng ko'p sinadigan sohasidir (Ahmedov, 16-bet).
+              </p>
+              <h4 class="text-sm font-bold text-white flex items-center space-x-2 pt-2 border-t border-slate-800">
+                <i class="fa-solid fa-arrows-spin text-amber-400"></i>
+                <span>Pronatsiya va Supinatsiya siri:</span>
+              </h4>
+              <p class="leading-relaxed">
+                Tirsak suyagi (ulna) medial tomonda harakatsiz o'q bo'lib turadi. Bilak suyagi (radius) esa uning boshchasi va pastki uchi atrofida aylanib, uning ustidan qiya kesib o'tadi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Hand Map (Ossa manus, Figs. 36–45) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">QO'L PANJASI INTERAKTIV XARITASI (OSSA MANUS)</div>
+          <h3 class="text-xl font-bold text-white">
+            36–45-rasmlar. Kaft usti (8 ta), Kaft (5 ta) va Barmoq falangalari (14 ta)
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">
+            Proksimal qator: scaphoideum, lunatum, triquetrum, pisiforme; Distal qator: trapezium, trapezoideum, capitatum, hamatum
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="hand-svg-container" class="w-full min-h-[480px]"></div>
+          </div>
+          <div class="lg:col-span-5 space-y-4">
+            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider font-semibold">Tanlangan suyak tavsifi:</div>
+            <div id="hand-bone-info"></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         MODULE 4: LOWER LIMB BONES / OYOQ SUYAKLARI (Figs 46–68, Pages 23–32)
+         ========================================================================= -->
+    <section id="module4" class="module-section space-y-10 hidden">
+      
+      <!-- Module Header -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-rose-500/30 relative overflow-hidden bg-gradient-to-r from-surface via-surface to-rose-950/30">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2.5 text-rose-400 text-xs font-mono mb-2">
+              <span class="px-2.5 py-1 rounded bg-rose-950/80 border border-rose-500/30 font-bold uppercase">4-Modul</span>
+              <span>46–68-rasmlar, 23–32-betlar</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Oyoq suyaklari (Ossa membri inferioris)
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 mt-2 max-w-3xl leading-relaxed">
+              Chanoq suyagining 14–16 yoshgacha tog'ay orqali birikib turishi va sinostozi, son suyagi kollodiafiz burchagi (erkaklar 130° vs ayollar to'g'ri burchakka yaqin) hamda oyoq gumbazi biomexanikasi.
+            </p>
+          </div>
+          <div class="shrink-0">
+            <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
+              <div class="text-2xl font-extrabold text-rose-400">62 ta</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">Suyaklar soni</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pelvic Girdle Fusion Timeline (Os coxae, Figs. 47–48) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">CHANOQ SUYAGI ONTOGENEZI</div>
+          <h3 class="text-xl font-bold text-white">
+            47, 48-rasmlar. Chanoq suyagining yoshga doir birlashishi (Sinostoz)
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">
+            Yonbosh (Os ilium), qov (Os pubis) va quymich (Os ischii) suyaklarining acetabulumda tutashishi
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="pelvis-fusion-svg-container" class="w-full max-w-md"></div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-5">
+            <!-- Age Slider -->
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-bold text-white flex items-center space-x-2">
+                  <i class="fa-solid fa-child text-cyan-400"></i>
+                  <span>Yoshni o'zgartiring:</span>
+                </label>
+                <span id="pelvis-age-val" class="text-sm font-mono font-bold text-cyan-400 bg-cyan-950/80 px-2.5 py-1 rounded border border-cyan-500/30">0 yosh</span>
+              </div>
+              <input id="pelvis-age-slider" type="range" min="0" max="18" step="1" value="0" class="w-full my-3">
+              <div class="flex justify-between text-[11px] font-mono text-slate-400">
+                <span>Yangi tug'ilgan</span>
+                <span>7 yosh</span>
+                <span>14 yosh</span>
+                <span>16+ (Sinostoz)</span>
+              </div>
+            </div>
+
+            <div id="pelvis-fusion-info"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Free Lower Limb: Femur & Neck-Shaft Angle (Figs. 49–58) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+          <div>
+            <div class="text-xs font-mono text-rose-400 font-semibold mb-1">KOLLODIAFIZ BURCHAGI VA JINSIY TAFOVUTLAR</div>
+            <h3 class="text-xl font-bold text-white">
+              49, 50-rasmlar. Son suyagi (Femur) va Patella (Tizza qopqog'i)
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">
+              Erkaklarda 130° vs Ayollarda 115–120° (to'g'ri burchakka yaqin) kollodiafiz burchagi
+            </p>
+          </div>
+          <div>
+            <button id="btn-toggle-femur-gender" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-lg shadow-cyan-500/25 flex items-center">
+              <i class="fa-solid fa-venus-mars mr-2"></i>
+              <span>Ayollar burchagini ko'rish (115–120°)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="femur-svg-container" class="w-full max-w-md"></div>
+          </div>
+          <div class="lg:col-span-5 space-y-4">
+            <div id="femur-angle-info"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Foot Skeleton & Arch Biomechanics (Ossa pedis, Figs. 59–68) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">OYOQ GUMBAZI BIOMEXANIKASI (ARCUS PEDIS)</div>
+          <h3 class="text-xl font-bold text-white">
+            59–68-rasmlar. Oyoq panjasi suyaklari va Gumbazning amortizatsiya kuchi
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">
+            Oshiq (talus), tovon (calcaneus), 3 ta ponasimon va gumbaz elastik prujinasi
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <!-- Arch Canvas -->
+            <div class="aspect-[16/10] w-full rounded-2xl overflow-hidden border border-cyan-500/20 bg-slate-950 p-2 relative">
+              <canvas id="foot-arch-canvas" class="anatomy-canvas"></canvas>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-5">
+            <!-- Weight Load Slider -->
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-bold text-white flex items-center space-x-2">
+                  <i class="fa-solid fa-person text-cyan-400"></i>
+                  <span>Tana og'irligi (Yuklama):</span>
+                </label>
+                <span id="foot-load-val" class="text-sm font-mono font-bold text-cyan-400 bg-cyan-950/80 px-2.5 py-1 rounded border border-cyan-500/30">70 kg</span>
+              </div>
+              <input id="foot-load-slider" type="range" min="0" max="140" value="70" class="w-full my-3">
+              <div class="flex justify-between text-[11px] font-mono text-slate-400">
+                <span>0 kg</span>
+                <span>70 kg (O'rtacha)</span>
+                <span>140 kg (Og'ir)</span>
+              </div>
+            </div>
+
+            <!-- Arch Clinical Importance -->
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-xs text-slate-300 space-y-2.5">
+              <h4 class="text-sm font-bold text-amber-400">Gumbazning resor vazifasi (Ahmedov, 31-bet):</h4>
+              <p class="leading-relaxed">
+                Oyoq gumbazlari (bo'ylama va ko'ndalang) odam vertikal qad ko'targanda paydo bo'ladi. Ular yurish va yugurish vaqtida yerga urilish zarbalarini 70-80% gacha amortizatsiya qilib, kalla qutisi va miyani chayqalishdan saqlaydi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         MODULE 5: SKULL / BOSH SKELETI — CRANIUM (Figs 69–113, Pages 33–52)
+         ========================================================================= -->
+    <section id="module5" class="module-section space-y-10 hidden">
+      
+      <!-- Module Header -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-purple-500/30 relative overflow-hidden bg-gradient-to-r from-surface via-surface to-purple-950/30">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2.5 text-purple-400 text-xs font-mono mb-2">
+              <span class="px-2.5 py-1 rounded bg-purple-950/80 border border-purple-500/30 font-bold uppercase">5-Modul</span>
+              <span>69–113-rasmlar, 33–52-betlar</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Bosh skeleti (Kalla / Cranium)
+            </h2>
+            <p class="text-sm sm:text-base text-slate-300 mt-2 max-w-3xl leading-relaxed">
+              Miya bo'limi (Neurocranium) va Yuz bo'limi (Viscerocranium). "Exploded View" qismlarga ajratish simulyatori, pastki jag' burchagi evolyutsiyasi, kalla asosi (12 ta nerv yo'llari) va chaqaloq liqildoqlari.
+            </p>
+          </div>
+          <div class="shrink-0">
+            <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
+              <div class="text-2xl font-extrabold text-purple-400">23 ta</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">Suyaklar soni</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- "Exploded View" Skull Simulator -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+          <div>
+            <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">EXPLODED VIEW KALLA SIMULYATORI</div>
+            <h3 class="text-xl font-bold text-white">
+              69, 70-rasmlar. Kallani qismlarga ajratish (Miya va Yuz bo'limlari)
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">
+              Peshona, tepa, ensa, chakka, ponasimon suyaklar hamda yuqori va pastki jag'
+            </p>
+          </div>
+          <div>
+            <button id="btn-explode-skull" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-lg shadow-cyan-500/25 flex items-center">
+              <i class="fa-solid fa-burst mr-2"></i>
+              <span>Kallani qismlarga ajratish (Exploded View)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="skull-svg-container" class="w-full max-w-lg"></div>
+          </div>
+          <div class="lg:col-span-5 space-y-4">
+            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider font-semibold">Tanlangan kalla suyagi:</div>
+            <div id="skull-part-info"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mandibular Angle Age Progression (Figs. 96–98) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <div class="text-xs font-mono text-amber-400 font-semibold mb-1">YOSHGA DOIR EVOLYUTSIYA</div>
+          <h3 class="text-xl font-bold text-white">
+            96–98-rasmlar. Pastki jag' burchagi (Angulus mandibulae) o'zgarishi
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">
+            Chaqaloqda 150° -> Katta odamda 110–130° -> Keksa odamda yana 140–150° ga yassilanishi
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="mandible-angle-svg-container" class="w-full max-w-sm"></div>
+          </div>
+
+          <div class="lg:col-span-6 space-y-5">
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800">
+              <div class="flex items-center justify-between mb-2">
+                <span id="mandible-stage-title" class="text-sm font-bold text-white">Katta yoshli odam</span>
+                <span id="mandible-angle-badge" class="text-sm font-mono font-bold text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded border border-amber-500/30">110°–130°</span>
+              </div>
+              <input id="mandible-age-slider" type="range" min="0" max="2" step="1" value="1" class="w-full my-3">
+              <div class="flex justify-between text-[11px] font-mono text-slate-400">
+                <span>Chaqaloq (~150°)</span>
+                <span>Katta yosh (110–130°)</span>
+                <span>Keksa odam (~150°)</span>
+              </div>
+              <p id="mandible-stage-desc" class="text-xs text-slate-300 mt-3 leading-relaxed"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skull Cavities & Base (Basis cranii interna - 12 Nerves) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">KALLA ASOSI VA 12 JUFT KALLA NERVLARI TESHIKLARI</div>
+          <h3 class="text-xl font-bold text-white">
+            109–111-rasmlar. Basis cranii interna (Oldingi, O'rta va Orqa chuqurchalar)
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">
+            G'alvir plastinka, turk egari (sella turcica), ko'rish kanali va foramen magnum
+          </p>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Fossa Navigation Tabs -->
+          <div class="flex space-x-2">
+            <button onclick="Module5.renderFossaTab('anterior')" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 text-slate-300">
+              Oldingi chuqurcha (I nerv)
+            </button>
+            <button onclick="Module5.renderFossaTab('media')" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 border border-amber-400 font-bold shadow-md">
+              O'rta chuqurcha (II–VI nervlar)
+            </button>
+            <button onclick="Module5.renderFossaTab('posterior')" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 text-slate-300">
+              Orqa chuqurcha (IX–XII nervlar)
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-7 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+              <div id="basis-cranii-svg-container" class="w-full max-w-md"></div>
+            </div>
+            <div class="lg:col-span-5 space-y-4">
+              <div id="fossa-detail-info"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Infant Skull & Fontanelles Timeline (Figs. 112–113) -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <div class="text-xs font-mono text-cyan-400 font-semibold mb-1">CHAQALOQ KALLASI VA LIQILDOQLAR VAQT SHKALASI</div>
+          <h3 class="text-xl font-bold text-white">
+            112, 113-rasmlar. Liqildoqlar (Fonticuli) va o'sish fazalari
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">
+            Oldingi katta liqildoq (2 yoshda), orqa kichik liqildoq (2 oyda) va 3 ta postnatal o'sish davri
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 flex justify-center">
+            <div id="infant-skull-svg-container" class="w-full max-w-sm"></div>
+          </div>
+
+          <div class="lg:col-span-6 space-y-5">
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-bold text-white flex items-center space-x-2">
+                  <i class="fa-solid fa-baby text-cyan-400"></i>
+                  <span>Bola yoshi (Oylik / Yosh):</span>
+                </label>
+                <span id="fontanelle-age-val" class="text-sm font-mono font-bold text-cyan-400 bg-cyan-950/80 px-2.5 py-1 rounded border border-cyan-500/30">0 oylik</span>
+              </div>
+              <input id="fontanelle-age-slider" type="range" min="0" max="24" step="1" value="0" class="w-full my-3">
+              <div class="flex justify-between text-[11px] font-mono text-slate-400">
+                <span>Tug'ilganda</span>
+                <span>2 oylik</span>
+                <span>1 yosh</span>
+                <span>2 yosh (To'liq yopilish)</span>
+              </div>
+            </div>
+
+            <div id="fontanelle-detail-info"></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         SECTION: MUSKULLAR HAQIDA TA'LIMOT (MIOLOGIYA - MYOLOGIA)
+         (Prof. N.K. Ahmedov, 1-jild, 114–220-rasmlar)
+         ========================================================================= -->
+    <section id="module-myology" class="module-section space-y-10 hidden">
+      
+      <!-- Module Header -->
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-rose-500/30 relative overflow-hidden bg-gradient-to-r from-surface via-surface to-rose-950/30">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2.5 text-rose-400 text-xs font-mono mb-2">
+              <span class="px-2.5 py-1 rounded bg-rose-950/80 border border-rose-500/30 font-bold uppercase">2-BO'LIM: MIOLOGIYA</span>
+              <span>114–220-rasmlar, Prof. N.K. Ahmedov</span>
+            </div>
+            <h2 id="myology-section-title" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Muskullar haqida ta'limot <span class="clinical-badge-latin">Systema musculorum</span>
+            </h2>
+            <p id="myology-section-desc" class="text-sm sm:text-base text-slate-300 mt-2 max-w-3xl leading-relaxed">
+              Odam gavdasining fazoda harakatlanishini, gavda muvozanatini, nafas olish, yutish va mimikani ta'minlovchi 600 dan ortiq skelet muskullari, ularning fassiyalari, paylari, innervatsiyasi va klinik ahamiyati.
+            </p>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="App.toggleStudyMode()" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-amber-400 text-slate-300 text-xs font-bold transition-all flex items-center space-x-1.5" title="O'z-o'zini sinash (T): yozuvlarni yashirish">
+              <i class="fa-solid fa-user-graduate text-amber-400"></i>
+              <span>O'z-o'zini sinash (T)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sub-section selector tabs inside Myology -->
+        <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-800">
+          <button onclick="ModuleMyology.switchSubSection('general')" data-myology-tab="general" class="myology-subtab-btn active px-3.5 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition-all bg-cyan-500/20 border-cyan-500/40 text-cyan-300">
+            <i class="fa-solid fa-shapes text-cyan-400"></i>
+            <span>1. Umumiy miologiya va shakllar</span>
+          </button>
+          <button onclick="ModuleMyology.switchSubSection('back-thorax')" data-myology-tab="back-thorax" class="myology-subtab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition-all text-slate-400">
+            <i class="fa-solid fa-lungs text-emerald-400"></i>
+            <span>2. Orqa va ko'krak (Diafragma)</span>
+          </button>
+          <button onclick="ModuleMyology.switchSubSection('abdomen')" data-myology-tab="abdomen" class="myology-subtab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition-all text-slate-400">
+            <i class="fa-solid fa-shield text-amber-400"></i>
+            <span>3. Qorin va chov kanali</span>
+          </button>
+          <button onclick="ModuleMyology.switchSubSection('head-neck')" data-myology-tab="head-neck" class="myology-subtab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition-all text-slate-400">
+            <i class="fa-solid fa-face-smile text-purple-400"></i>
+            <span>4. Bosh va bo'yin</span>
+          </button>
+          <button onclick="ModuleMyology.switchSubSection('limbs')" data-myology-tab="limbs" class="myology-subtab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition-all text-slate-400">
+            <i class="fa-solid fa-person-walking text-rose-400"></i>
+            <span>5. Qo'l va oyoq muskullari</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Split-Screen Clinical Study View for Myology -->
+      <div class="clinical-study-view">
+        <!-- Left: 2D Vector Diagram Pane with clickable hotspot pins -->
+        <div class="clinical-diagram-pane">
+          <div class="p-3.5 border-b border-slate-800/80 flex items-center justify-between text-xs">
+            <div class="flex items-center space-x-2 font-mono text-cyan-400 font-bold">
+              <i class="fa-solid fa-diagram-project"></i>
+              <span>2D VEKTOR ANATOMIK CHIZMA</span>
+            </div>
+            <span class="text-[11px] font-mono text-slate-400">Interaktiv Hotspot Pinlar</span>
+          </div>
+          <div id="myology-diagram-mount" class="clinical-diagram-stage">
+            <!-- Rendered dynamically by ModuleMyology -->
+          </div>
+        </div>
+
+        <!-- Right: Structured Clinical Notes Pane (Netter/Sobotta dossier) -->
+        <div class="clinical-notes-pane">
+          <div class="p-3.5 border-b border-slate-800/80 flex items-center justify-between text-xs">
+            <div class="flex items-center space-x-2 font-mono text-rose-400 font-bold">
+              <i class="fa-solid fa-file-medical"></i>
+              <span>KLINIK MA'LUMOTNOMA (DOSYE)</span>
+            </div>
+            <span class="text-[11px] font-mono text-slate-400">N.K. Ahmedov konspekti</span>
+          </div>
+          <div id="myology-notes-mount" class="p-4 sm:p-5">
+            <!-- Rendered dynamically by ModuleMyology via App.renderClinicalDossier -->
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         SECTION: LOTINCHA-O'ZBEKCHA ANATOMIK LUG'AT (GLOSSARY)
+         ========================================================================= -->
+    <section id="module-glossary" class="module-section space-y-8 hidden">
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-amber-500/30 bg-gradient-to-r from-surface to-amber-950/20">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <div class="text-xs font-mono text-amber-400 font-bold uppercase mb-1">TERMINOLOGIK MA'LUMOTNOMA</div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Lotincha-O'zbekcha Anatomik Lug'at</h2>
+            <p class="text-sm text-slate-300 mt-2 max-w-2xl leading-relaxed">
+              Ahmedov atlasining 1-bo'limida uchraydigan barcha xalqaro lotincha anatomik atamalar, ularning o'zbekcha nomlari va klinik-amaliy ahamiyati.
+            </p>
+          </div>
+          <div class="w-full md:w-72">
+            <div class="relative">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+              <input id="glossary-filter-input" type="text" placeholder="Lug'atdan qidirish..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-amber-400 focus:outline-none text-sm text-white placeholder-slate-500">
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-800">
+          <button data-glossary-cat="Barchasi" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 transition-all active">Barchasi</button>
+          <button data-glossary-cat="Umumiy" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900/80 border border-slate-800 text-slate-300 hover:border-amber-400 transition-all">Umumiy suyak</button>
+          <button data-glossary-cat="Tana" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900/80 border border-slate-800 text-slate-300 hover:border-amber-400 transition-all">Tana skeleti</button>
+          <button data-glossary-cat="Qo'l" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900/80 border border-slate-800 text-slate-300 hover:border-amber-400 transition-all">Qo'l suyaklari</button>
+          <button data-glossary-cat="Oyoq" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900/80 border border-slate-800 text-slate-300 hover:border-amber-400 transition-all">Oyoq suyaklari</button>
+          <button data-glossary-cat="Kalla" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-900/80 border border-slate-800 text-slate-300 hover:border-amber-400 transition-all">Bosh skeleti</button>
+        </div>
+      </div>
+
+      <div id="glossary-terms-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION: INTERAKTIV VIKTORINA (QUIZ)
+         ========================================================================= -->
+    <section id="module-quiz" class="module-section space-y-8 hidden">
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/30 bg-gradient-to-r from-surface to-cyan-950/30">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <div class="text-xs font-mono text-cyan-400 font-bold uppercase mb-1">BILIMNI SINASH TIZIMI</div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Interaktiv Anatomik Viktorina</h2>
+            <p class="text-sm text-slate-300 mt-2 max-w-2xl leading-relaxed">
+              Tibbiyot instituti va kollej talabalari uchun N.K. Ahmedov darsligining 1-bo'limi bo'yicha maxsus tuzilgan klinik-anatomik test savollari.
+            </p>
+          </div>
+          <div class="flex items-center space-x-3">
+            <span id="quiz-counter-badge" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-cyan-500/30 font-mono text-xs text-cyan-400 font-bold">
+              Savol: 1 / 15
+            </span>
+            <span id="quiz-score-badge" class="px-3 py-1.5 rounded-xl bg-amber-950/80 border border-amber-500/30 font-mono text-xs text-amber-400 font-bold">
+              Ball: 0
+            </span>
+            <button id="btn-restart-quiz" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs border border-slate-700" title="Qaytadan boshlash">
+              <i class="fa-solid fa-arrow-rotate-left"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question Box -->
+      <div class="max-w-3xl mx-auto">
+        <div id="quiz-question-box" class="glass-panel rounded-3xl border border-slate-800 overflow-hidden shadow-2xl"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION: ASL RASMLAR GALEREYASI (ORIGINAL ATLAS FIGURES)
+         ========================================================================= -->
+    <section id="module-gallery" class="module-section space-y-8 hidden">
+      <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-cyan-500/30 bg-gradient-to-r from-surface to-cyan-950/20">
+        <div>
+          <div class="text-xs font-mono text-cyan-400 font-bold uppercase mb-1">ASL KITOB RASMLARI KOLLEKSIYASI</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Prof. N.K. Ahmedov Atlasining Asl Sahifalari (1–113-rasmlar)</h2>
+          <p class="text-sm text-slate-300 mt-2 max-w-2xl leading-relaxed">
+            Yuklangan kitobdagi original tarixiy rasmlarni ko'rish va interaktiv SVG modellari bilan yonma-yon solishtirish uchun rasm ustiga bosing.
+          </p>
+        </div>
+      </div>
+
+      <div id="atlas-figures-gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-surface/70 border-t border-slate-800/80 py-8 px-4 mt-16 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2 text-slate-400">
+        <i class="fa-solid fa-book-medical text-cyan-400"></i>
+        <span>Manba: N.K. Ahmedov "Odam anatomiyasi (Atlas, 1-jild)", Toshkent.</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span>1-bo'lim: "Suyaklar haqida ta'limot, Osteologiya" (4–53-betlar, 1–113-rasmlar)</span>
+        <button onclick="AdminPanel.open()" class="px-2.5 py-1 rounded-lg border border-slate-800 hover:border-cyan-500/40 bg-slate-900/60 text-slate-400 hover:text-cyan-300 transition-colors flex items-center space-x-1.5" title="Admin panelini ochish">
+          <i class="fa-solid fa-lock text-cyan-400 text-[10px]"></i>
+          <span>Admin panel</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODALS: SEARCH MODAL
+       ========================================================================= -->
+  <div id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-16 px-4 modal-backdrop hidden">
+    <div class="glass-panel w-full max-w-2xl rounded-3xl border border-cyan-500/40 p-6 shadow-2xl relative animate-fadeIn">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div class="flex items-center space-x-3 text-cyan-400">
+          <i class="fa-solid fa-magnifying-glass text-lg"></i>
+          <h3 class="font-bold text-white text-base">Anatomik Atamalarni Tezkor Qidirish</h3>
+        </div>
+        <button id="btn-close-search" class="text-slate-400 hover:text-white transition-colors p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="my-4">
+        <input id="global-search-input" type="text" placeholder="Lotincha yoki o'zbekcha atama kiriting (masalan: dens, atlas, scapula, acetabulum)..." class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-cyan-500/30 focus:border-cyan-400 focus:outline-none text-sm text-white placeholder-slate-500 font-mono">
+      </div>
+
+      <div id="global-search-results" class="max-h-96 overflow-y-auto space-y-2 pr-1">
+        <div class="p-6 text-center text-xs text-slate-500 font-mono">Qidirish uchun atama yozing...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODALS: ORIGINAL BOOK FIGURE VIEWER MODAL
+       ========================================================================= -->
+  <div id="figure-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden" onclick="App.closeFigureModal()">
+    <div class="glass-panel max-w-4xl max-h-[92vh] w-full rounded-3xl border border-cyan-500/40 p-4 sm:p-6 shadow-2xl flex flex-col relative animate-fadeIn" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h4 id="figure-modal-title" class="text-sm sm:text-base font-bold text-white truncate pr-4"></h4>
+        <button onclick="App.closeFigureModal()" class="text-slate-400 hover:text-white transition-colors p-1">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+      <div class="flex-1 overflow-auto my-3 flex justify-center bg-slate-950/80 rounded-2xl p-2">
+        <img id="figure-modal-img" src="" alt="Atlas Figure" class="max-h-[75vh] w-auto object-contain rounded-lg">
+      </div>
+      <div class="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
+        <span>Prof. N.K. Ahmedov "Odam anatomiyasi" 1-jild original illyustratsiyasi</span>
+        <button onclick="App.closeFigureModal()" class="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold">Yopish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODALS: ADMIN PANEL MODAL
+       ========================================================================= -->
+  <div id="admin-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 modal-backdrop hidden">
+    <div class="glass-panel cyber-hud-card w-full max-w-5xl h-[88vh] max-h-[92vh] rounded-3xl border border-cyan-500/40 p-4 sm:p-6 shadow-2xl flex flex-col relative animate-fadeIn bg-slate-950/95 backdrop-blur-xl">
+      
+      <!-- Modal Top Bar -->
+      <div class="flex items-center justify-between pb-3.5 border-b border-slate-800 shrink-0">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-teal-400 p-0.5 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+            <div class="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center text-cyan-400">
+              <i class="fa-solid fa-sliders"></i>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h3 class="text-base sm:text-lg font-bold text-white tracking-tight">Admin Boshqaruv Markazi</h3>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-950 text-cyan-400 border border-cyan-500/40 font-bold uppercase hidden sm:inline">
+                localStorage CRUD
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 font-sans hidden sm:block">
+              Viktorina savollari va anatomik ma'lumotlarni mahalliylashtirilgan boshqarish
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <button id="admin-btn-lock" onclick="AdminPanel.toggleLock()" class="hidden px-2.5 py-1.5 rounded-lg border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold transition-all flex items-center space-x-1.5" title="Qulflash">
+            <i class="fa-solid fa-lock text-amber-400 text-xs"></i>
+            <span class="hidden sm:inline">Qulflash</span>
+          </button>
+          <button onclick="AdminPanel.close()" class="w-9 h-9 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-700 flex items-center justify-center transition-colors">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Passcode Prompt Screen (If PIN enabled & locked) -->
+      <div id="admin-passcode-view" class="hidden flex-1 flex flex-col items-center justify-center py-10 px-4 text-center"></div>
+
+      <!-- Main Admin Content Area -->
+      <div id="admin-main-view" class="flex-1 overflow-hidden flex flex-col pt-3">
+        <!-- Sub-navigation Tabs -->
+        <div class="flex items-center space-x-1.5 sm:space-x-2 pb-3 border-b border-slate-800 overflow-x-auto min-w-max shrink-0">
+          <button onclick="AdminPanel.setTab('questions')" id="admin-tab-questions" class="admin-tab-btn active px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 bg-cyan-950/80 text-cyan-400 border border-cyan-500/40">
+            <i class="fa-solid fa-circle-question"></i>
+            <span>Viktorina Savollari</span>
+            <span id="admin-questions-badge" class="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-cyan-500/20 text-cyan-300">0</span>
+          </button>
+          <button onclick="AdminPanel.setTab('entries')" id="admin-tab-entries" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 text-slate-400 hover:text-slate-200 border border-transparent">
+            <i class="fa-solid fa-book-medical"></i>
+            <span>Anatomik Qaydlar</span>
+            <span id="admin-entries-badge" class="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-slate-800 text-slate-400">0</span>
+          </button>
+          <button onclick="AdminPanel.setTab('muscles')" id="admin-tab-muscles" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 text-slate-400 hover:text-rose-300 border border-transparent">
+            <i class="fa-solid fa-person-running text-rose-400"></i>
+            <span>Muskullar (Miologiya)</span>
+            <span id="admin-muscles-badge" class="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-slate-800 text-slate-400">0</span>
+          </button>
+          <button onclick="AdminPanel.setTab('backup')" id="admin-tab-backup" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 text-slate-400 hover:text-slate-200 border border-transparent">
+            <i class="fa-solid fa-hard-drive"></i>
+            <span>Zaxira & Eksport</span>
+          </button>
+          <button onclick="AdminPanel.setTab('settings')" id="admin-tab-settings" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 text-slate-400 hover:text-slate-200 border border-transparent">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Xavfsizlik (PIN)</span>
+          </button>
+        </div>
+
+        <!-- Tab Contents -->
+        <div id="admin-content-questions" class="admin-tab-content flex-1 overflow-y-auto py-3 space-y-3 pr-1"></div>
+        <div id="admin-content-entries" class="admin-tab-content hidden flex-1 overflow-y-auto py-3 space-y-3 pr-1"></div>
+        <div id="admin-content-muscles" class="admin-tab-content hidden flex-1 overflow-y-auto py-3 space-y-3 pr-1"></div>
+        <div id="admin-content-backup" class="admin-tab-content hidden flex-1 overflow-y-auto py-3 space-y-3 pr-1"></div>
+        <div id="admin-content-settings" class="admin-tab-content hidden flex-1 overflow-y-auto py-3 space-y-3 pr-1"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODALS: QUESTION FORM MODAL (ADD / EDIT)
+       ========================================================================= -->
+  <div id="admin-question-form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 modal-backdrop hidden">
+    <div class="glass-panel w-full max-w-2xl max-h-[92vh] rounded-3xl border border-cyan-500/50 p-5 sm:p-6 shadow-2xl flex flex-col relative animate-fadeIn bg-slate-950/95 overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h4 id="admin-qform-title" class="text-base font-bold text-white flex items-center space-x-2">
+          <i class="fa-solid fa-pen-nib text-cyan-400"></i>
+          <span>Savol Qo'shish / Tahrirlash</span>
+        </h4>
+        <button type="button" onclick="AdminPanel.closeQuestionFormModal()" class="text-slate-400 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form id="admin-question-form" onsubmit="AdminPanel.handleQuestionFormSubmit(event)" class="space-y-4 pt-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">Savol matni (Klinik / Anatomik savol):</label>
+          <textarea id="admin-qform-text" rows="2" required placeholder="Masalan: Ahmedov darsligiga ko'ra, normal odam suyagining pishiqligi..." class="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 text-white placeholder-slate-500 text-xs"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1 flex items-center space-x-1.5">
+              <span class="w-5 h-5 rounded bg-slate-800 text-cyan-400 flex items-center justify-center text-[10px] font-mono font-bold">A</span>
+              <span>A varianti:</span>
+            </label>
+            <input type="text" id="admin-qform-opt0" required placeholder="A variant matni..." class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 text-white placeholder-slate-500 text-xs">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1 flex items-center space-x-1.5">
+              <span class="w-5 h-5 rounded bg-slate-800 text-cyan-400 flex items-center justify-center text-[10px] font-mono font-bold">B</span>
+              <span>B varianti:</span>
+            </label>
+            <input type="text" id="admin-qform-opt1" required placeholder="B variant matni..." class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 text-white placeholder-slate-500 text-xs">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1 flex items-center space-x-1.5">
+              <span class="w-5 h-5 rounded bg-slate-800 text-cyan-400 flex items-center justify-center text-[10px] font-mono font-bold">C</span>
+              <span>C varianti:</span>
+            </label>
+            <input type="text" id="admin-qform-opt2" required placeholder="C variant matni..." class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 text-white placeholder-slate-500 text-xs">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1 flex items-center space-x-1.5">
+              <span class="w-5 h-5 rounded bg-slate-800 text-cyan-400 flex items-center justify-center text-[10px] font-mono font-bold">D</span>
+              <span>D varianti:</span>
+            </label>
+            <input type="text" id="admin-qform-opt3" required placeholder="D variant matni..." class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 text-white placeholder-slate-500 text-xs">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-emerald-400 mb-1">To'g'ri javob varianti:</label>
+          <select id="admin-qform-correct" class="w-full p-2.5 rounded-xl bg-slate-900 border border-emerald-500/50 text-white focus:outline-none focus:border-emerald-400 text-xs font-semibold">
+            <option value="0">A varianti</option>
+            <option value="1">B varianti</option>
+            <option value="2">C varianti</option>
+            <option value="3">D varianti</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">Anatomik / Tibbiy izoh (Ahmedov kitobi manbasi):</label>
+          <textarea id="admin-qform-explanation" rows="2" placeholder="Ahmedov atlasining 6-betida: 'Normal suyak eman daraxtidan pishiq...' deb ta'riflangan." class="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 text-white placeholder-slate-500 text-xs"></textarea>
+        </div>
+
+        <div class="flex items-center justify-end space-x-2 pt-3 border-t border-slate-800">
+          <button type="button" onclick="AdminPanel.closeQuestionFormModal()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold transition-colors">
+            Bekor qilish
+          </button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-400 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-extrabold shadow-md shadow-cyan-500/25 transition-all">
+            Saqlash
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODALS: ENTRY FORM MODAL (CUSTOM ANATOMY / GLOSSARY)
+       ========================================================================= -->
+  <div id="admin-entry-form-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 modal-backdrop hidden">
+    <div class="glass-panel w-full max-w-xl max-h-[92vh] rounded-3xl border border-cyan-500/50 p-5 sm:p-6 shadow-2xl flex flex-col relative animate-fadeIn bg-slate-950/95 overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h4 id="admin-eform-title" class="text-base font-bold text-white flex items-center space-x-2">
+          <i class="fa-solid fa-book-medical text-amber-400"></i>
+          <span>Anatomik Qayd Qo'shish / Tahrirlash</span>
+        </h4>
+        <button type="button" onclick="AdminPanel.closeEntryFormModal()" class="text-slate-400 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form id="admin-entry-form" onsubmit="AdminPanel.handleEntryFormSubmit(event)" class="space-y-4 pt-4 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Lotincha atama (Terminus Latinus):</label>
+            <input type="text" id="admin-eform-lat" required placeholder="Masalan: Sulcus caroticus" class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 text-white placeholder-slate-500 text-xs font-mono">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">O'zbekcha nomi:</label>
+            <input type="text" id="admin-eform-uz" required placeholder="Masalan: Uyqu egati" class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 text-white placeholder-slate-500 text-xs">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Bo'lim / Kategoriya:</label>
+            <select id="admin-eform-cat" class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400 text-xs">
+              <option value="Umumiy">1-Modul: Umumiy osteologiya</option>
+              <option value="Tana">2-Modul: Tana skeleti (Umurtqa & Ko'krak)</option>
+              <option value="Qo'l">3-Modul: Qo'l suyaklari</option>
+              <option value="Oyoq">4-Modul: Oyoq suyaklari</option>
+              <option value="Kalla">5-Modul: Kalla suyaklari</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Ahmedov kitobi rasm raqamlari:</label>
+            <input type="text" id="admin-eform-fig" placeholder="Masalan: 76, 80" class="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 text-white placeholder-slate-500 text-xs font-mono">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">Anatomik tavsifi va xususiyati:</label>
+          <textarea id="admin-eform-desc" rows="3" required placeholder="Chakka suyagi piramidasidagi uyqu arteriyasi egati..." class="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 focus:border-cyan-400 text-white placeholder-slate-500 text-xs"></textarea>
+        </div>
+
+        <div class="flex items-center justify-end space-x-2 pt-3 border-t border-slate-800">
+          <button type="button" onclick="AdminPanel.closeEntryFormModal()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold transition-colors">
+            Bekor qilish
+          </button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-400 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-extrabold shadow-md shadow-cyan-500/25 transition-all">
+            Saqlash
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- APPLICATION SCRIPTS -->
+  <script src="js/data.js"></script>
+  <script src="js/myology-data.js"></script>
+  <script src="js/module1.js"></script>
+  <script src="js/module2.js"></script>
+  <script src="js/module3.js"></script>
+  <script src="js/module4.js"></script>
+  <script src="js/module5.js"></script>
+  <script src="js/module-myology.js"></script>
+  <script src="js/hero-intro.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
